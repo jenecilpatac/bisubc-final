@@ -24,7 +24,11 @@
                         <?php foreach ($_POST['table']['table_data'] as $row): ?>
                             <tr>
                                 <?php foreach ($_POST['table']['table_headers'] as $col => $header): ?>
-                                    <td><?php echo $row[$col]; ?></td>
+                                    <td>
+                                        <?php if (isset($row[$col])): ?>
+                                            <?php echo $row[$col]; ?>
+                                        <?php endif; ?>
+                                    </td>
                                 <?php endforeach; ?>
                             </tr>
                         <?php endforeach; ?>

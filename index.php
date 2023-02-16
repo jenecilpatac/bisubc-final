@@ -39,9 +39,8 @@ if ($_GET['m'] == 'login') {
             } else {
                 $_SESSION['ais']['logged'] = $user;
                 //print "<pre> POST ISSET "; print_r($_SESSION); exit;
-                header("Location: index.php");
-                //require_once 'views/ui_home.php';
-                //exit;
+                header("Location: ./index.php");
+                exit;
             }
         } else {
             $_POST['danger'] = "Populate all fields.";
@@ -52,8 +51,9 @@ if ($_GET['m'] == 'login') {
         exit;
 
     } elseif (!empty($_SESSION['ais']['logged'])) {
-        print "<pre>ELSEIF "; print_r($_SESSION); exit;
-        header("Location: index.php");
+        //print "<pre>ELSEIF "; print_r($_SESSION); exit;
+        header("Location: ./index.php");
+        exit;
 
     } else {
         //print "<pre>ELSE "; print_r($_SESSION); exit;
@@ -103,19 +103,19 @@ if ($_GET['m'] == 'login') {
     require_once 'views/ui_tracker.php';
     die();
 }
-
 //print "<pre>"; print_r($_GET); exit;
 
 # Login
-if (!(isset($_SESSION['ais']['logged']) && ($_SESSION['ais']['logged'] == ADMIN_USERNAME || $_SESSION['ais']['logged']['First_Name'] != ''))) {
-    header("Location: index.php?m=login");
+if (!isset($_SESSION['ais']['logged']) || empty($_SESSION['ais']['logged'])) {
+    //print "<pre>"; print_r($_SESSION); exit;
+    header("Location: ./index.php?m=login&type=admin");
 }
-
 
 $_POST['alert_data'] = array();
 if (isset($_SESSION['ais']['logged'])) {
     if ($_SESSION['ais']['logged'] == ADMIN_USERNAME) {
-        //$alerts = $sql->getAdminAlerts($alumni_key);
+        $_POST['alert_data']['unread'] = 0;
+        $_POST['alert_data']['alerts'] = array();
     } else {
         $alumni_key = intval($_SESSION['ais']['logged']['Alumni_Key']);
         $_POST['alert_data']['unread'] = $sql->getUnreadAlumniAlertCount($alumni_key);

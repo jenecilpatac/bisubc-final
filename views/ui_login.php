@@ -62,9 +62,9 @@
                                     <hr>
                                 </form>
                                 <hr>
-                                <div class="text-center">
+                                <!--<div class="text-center">
                                     <a class="small" href="index.php?m=reset_password">Forgot Password?</a>
-                                </div>
+                                </div>-->
                                 <div class="text-center">
                                     <a class="small" href="index.php?m=register">Create an Account!</a>
                                 </div>

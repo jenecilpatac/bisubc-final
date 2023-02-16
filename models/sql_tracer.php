@@ -23,6 +23,24 @@ class SQL_Tracer extends DB_Connect {
     {
         Parent::__construct();
 
+        require_once 'models/sql_alumni.php';
+        $this->sql = new SQL_Alumni;
+
+    }
+
+    public function getRegisteredAlumniList()
+    {
+        $sql = "
+            SELECT *, 
+                concat(First_Name, ' ', Last_Name) as Name
+            FROM users as t1
+            LEFT JOIN alumni as t2 ON t1.Alumni_Key = t2.Alumni_Key
+            ORDER BY Last_Name, First_Name
+        ";
+        $results = $this->getDataFromTable($sql);
+        //print "<pre>$sql"; print_r($results); exit;
+
+        return $results;
     }
 
     public function getRegisteredAlumniTableData()
@@ -38,7 +56,9 @@ class SQL_Tracer extends DB_Connect {
             'Position' => 'Position',
             'Awards_Received' => 'Awards Received',
         );
-        $table['table_data'] = array();
+
+        
+        $table['table_data'] = $this->getRegisteredAlumniList();
 
         return $table;
     }
