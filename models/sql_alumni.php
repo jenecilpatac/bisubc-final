@@ -238,18 +238,15 @@ class SQL_Alumni extends DB_Connect {
     public function addUser($alumni)
     {
         $table = 'users';
-        # Has Password
-        $alumni['Password'] = hashPassword($alumni['Password']);
-        $alumni['Birth_Date'] = strtotime($alumni['Birth_Date']);
         $data = array();
-        $row = array();
-        foreach ($this->users_tbl as $col) {
-            $row[] = isset($alumni[$col]) ? $alumni[$col] : '';
-        }
-        $data[] = $row;
-        $res = $this->insertTableRow($table, $this->users_tbl, $data);
+        $data['Alumni_Key'] = $alumni['Alumni_Key'];
+        $data['Email'] = $alumni['email'];
+        # Has Password
+        $data['Pass_Word'] = hashPassword($alumni['password']);
+        $data['Date_Registered'] = time();
+        $result = $this->insertTableRow($table, array_keys($data), array($data));
 
-        return $res;
+        return $result;
     }
 
     public function addAlumni($alumni)
@@ -338,6 +335,60 @@ class SQL_Alumni extends DB_Connect {
         return $table;   
     }
 
+    public function verifyAlumni($batch_key, $fname, $lname) 
+    {
+        $results = array();
+        if ($batch_key > 0) {
+            $sql = "
+                SELECT *
+                FROM alumni
+                WHERE Batch_Key = '{$batch_key}'
+                    AND First_Name = '{$fname}'
+                    AND Last_Name = '{$lname}'
+            ";
+            //print "<pre>$sql\n"; exit;
+            $res = $this->getDataFromTable($sql);
+            if (empty($res)) {
+                $results = array();
+            } else {
+                $results = $res[0];
+            }
+        }
+
+        return $results;
+    }
+
+    public function createAlumniUser($data)
+    {
+        $results = array();
+        $course_key = $this->getCourseKey($data['course']);
+        if ($course_key > 0) {
+            $batch_key = $this->getBatchKey($course_key, $data['batch']);
+            $alumni = $this->verifyAlumni($batch_key, $data['firstname'], $data['lastname']);
+            //print "<pre>"; print_r($alumni); exit;
+            if (!empty($alumni)) {
+                # Verified, create alumni user account                                   
+                $registered = $this->getRegisteredAlumniProfile($alumni['Alumni_Key']);
+                //print "<pre>"; print_r($registered); exit;
+                if (empty($registered)) {
+                    # Create user user account
+                    $data['Alumni_Key'] = $alumni['Alumni_Key'];
+                    $res = $this->addUser($data);
+                    //print "<pre>"; var_dump($user); exit;
+                    if ($res) {
+                        # User account created
+                        $results = $this->getRegisteredAlumniProfile($alumni['Alumni_Key']);
+                    }               
+                } else {
+                    # Existing user, already registed
+                    $results = -1;
+                } 
+            }
+        }        
+
+        return $results;
+    }
+
     public function getAlumniData() 
     {
         $alumni = array(
@@ -397,6 +448,28 @@ class SQL_Alumni extends DB_Connect {
 
         return $data;
     }
+
+    public function getRegisteredAlumniProfile($alumni_key)
+    {
+        $sql = "
+            SELECT * 
+            FROM alumni as a 
+            LEFT JOIN users as u on u.Alumni_Key = a.Alumni_Key
+            LEFT JOIN batches as b on a.Batch_Key = b.Batch_Key
+            LEFT JOIN courses as c on b.Course_Key = c.Course_Key
+            WHERE a.Alumni_Key = $alumni_key
+                AND User_Key is not NULL
+                AND Email is not NULL
+        ";
+        //print "<pre>$sql\n"; exit;
+        $results = $this->getDataFromTable($sql);
+        $profile = array();
+        foreach ($results as $row) {
+            $profile = $row;
+        }
+
+        return $profile;
+    }   
 
     public function getUserProfile($user_key)
     {
@@ -594,6 +667,25 @@ class SQL_Alumni extends DB_Connect {
         $ago = "{$t}{$unit}";
 
         return $ago;
+    }
+
+    public function isValidUser($email, $password)
+    {
+        $sql = "
+            SELECT * 
+            FROM users 
+            WHERE Pass_Word = '".hashPassword($password)."'
+                AND Email = '".$email."'
+        ";
+        $res = $this->getDataFromTable($sql);
+        //print "<pre>$sql"; var_dump($res); exit;
+        $user = array();
+        if ($res && $res[0]['Alumni_Key'] > 0) {                               
+            $user = $this->getRegisteredAlumniProfile($res[0]['Alumni_Key']);
+
+        }
+
+        return $user;
     }
 
 }

@@ -54,6 +54,20 @@ CREATE TABLE alumni (
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
 
+--
+-- Table structure for table users
+--
+CREATE TABLE users (
+  User_Key int(10) unsigned NOT NULL auto_increment,
+  Alumni_Key int(10) unsigned,
+  Email char(100) NOT NULL,
+  Pass_Word char(32) NOT NULL,
+  Date_Registered int(10) NOT NULL,
+  PRIMARY KEY  (User_Key),
+  UNIQUE KEY tbl_unique (Alumni_Key),
+  KEY tbl_index1 (Email)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
 -- CREATE USER [IF NOT EXISTS] 'bisu'@'localhost' 
 -- IDENTIFIED BY 'B!su';
 

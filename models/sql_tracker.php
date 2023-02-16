@@ -25,25 +25,6 @@ class SQL_Tracker extends DB_Connect {
 
     }
 
-    public function verifyAlumni($email, $fname, $lname) 
-    {
-        $sql = "
-            SELECT *
-            FROM alumni
-            WHERE Email = '{$email}'
-                AND First_Name = '{$fname}'
-                AND Last_Name = '{$lname}'
-        ";
-        $results = $this->getDataFromTable($sql);
-        if (empty($results)) {
-            $results = array();
-        }
-
-        return $results;
-
-
-    }
-
 }
 
 ?>
