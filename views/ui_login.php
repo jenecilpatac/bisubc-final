@@ -17,17 +17,34 @@
                         <div class="col-lg-6">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">Welcome!!!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">
+                                        <?php if (isset($_GET['type']) && $_GET['type'] == 'admin'): ?>
+                                            Welcome Admin!
+                                        <?php else: ?>
+                                            Welcome Alumnus/Alumna!
+                                        <?php endif; ?>
+                                    </h1>
+                                    <?php require_once 'views/tpl_alert_msg.php'; ?>              
                                 </div>
                                 <form class="user" action="index.php?m=login" method="POST">
                                     <div class="form-group">
-                                        <input type="email" class="form-control form-control-user"
-                                            id="exampleInputEmail" aria-describedby="emailHelp"
-                                            placeholder="Enter Email Address...">
+                                        <?php if (isset($_GET['type']) && $_GET['type'] == 'admin'): ?>
+                                            <input type="text" class="form-control form-control-user" id="email"
+                                            <?php if (isset($_POST['email'])): ?>
+                                                value="<?php echo $_POST['email'] ?>"
+                                            <?php endif; ?>
+                                            name="email" placeholder="Enter Admin Username">
+                                        <?php else: ?>
+                                            <input type="email" class="form-control form-control-user" id="email" aria-describedby="emailHelp"
+                                            <?php if (isset($_POST['email'])): ?>
+                                                value="<?php echo $_POST['email'] ?>"
+                                            <?php endif; ?>
+                                            name="email" placeholder="Enter Email Address">
+                                        <?php endif; ?>                                        
                                     </div>
                                     <div class="form-group">
-                                        <input type="password" class="form-control form-control-user"
-                                            id="exampleInputPassword" placeholder="Password">
+                                        <input type="password" class="form-control form-control-user" id="password"    
+                                        name="password" placeholder="Enter Password">
                                     </div>
                                     <!--
                                     <div class="form-group">
@@ -49,7 +66,14 @@
                                     <a class="small" href="index.php?m=reset_password">Forgot Password?</a>
                                 </div>
                                 <div class="text-center">
-                                    <a class="small" href="index.php?m=verify">Create an Account!</a>
+                                    <a class="small" href="index.php?m=register">Create an Account!</a>
+                                </div>
+                                <div class="text-center">
+                                    <?php if (isset($_GET['type']) && $_GET['type'] == 'admin'): ?>
+                                        <a class="small" href="index.php?m=login">Login as Alumnus/Alumna!</a>
+                                    <?php else: ?>
+                                        <a class="small" href="index.php?m=login&type=admin">Login as Admin!</a>
+                                    <?php endif; ?>
                                 </div>
                             </div>
                         </div>

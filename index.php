@@ -3,9 +3,8 @@
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-$_SESSION['ais']['logged'] = 'admin';
+//$_SESSION['ais']['logged'] = 'admin';
 //print "<pre>"; print_r($_SESSION); exit;
-//print "<pre>"; print_r($_GET); exit;
 
 require_once 'config.php';
 require_once 'helper.php';
@@ -23,38 +22,51 @@ if (!isset($_GET['m'])) {
 
 # Login
 if ($_GET['m'] == 'login') {
-    $valid = false;
+    //print "<pre>"; print_r($_GET); print_r($_POST); exit;
     if (isset($_POST['login']) && $_POST['login'] == 'submit') {
-        $valid = false;
-        if (isset($_POST['email']) && $_POST['username'] !== '' && isset($_POST['password']) && $_POST['password'] !== '') {
-            $_SESSION['logged'] = array();
-            include_once 'models/db_connect.php';
-            $sql = new DB_Connect; 
-            $valid = $sql->isValidUser($_POST['username'], $_POST['password']);
-            if (!$valid) {
+        //print "<pre>"; print_r($_POST); exit;
+        if (isset($_POST['email']) && $_POST['email'] !== '' && isset($_POST['password']) && $_POST['password'] !== '') {
+            $_SESSION['ais']['logged'] = array();
+            if ($_POST['email'] == ADMIN_USERNAME && $_POST['password'] == ADMIN_PASS) {
+                //print "<pre>"; print_r($_GET); exit;
+                $user = ADMIN_USERNAME;
+            } else {
+                $user = $sql->isValidUser($_POST['email'], $_POST['password']);
+                //print "<pre>"; var_dump($user); exit; 
+            }
+            if (empty($user)) {
                 $_POST['danger'] = "Either user does not exist or username/password mismatched.";
             } else {
-                $_SESSION['logged'] = $_POST['logged'];
-                require 'init.php';
+                $_SESSION['ais']['logged'] = $user;
+                //print "<pre> POST ISSET "; print_r($_SESSION); exit;
+                require_once 'views/ui_home.php';
+                exit;
             }
         } else {
-            $_POST['danger'] = "Invalid Login.";
-        }
-    } elseif (!empty($_SESSION['logged']) && $_SESSION['logged'] != 'guest') {
-        $valid = true;
+            $_POST['danger'] = "Populate all fields.";
+        }        
+        //print "<pre>ISSET "; print_r($_SESSION); exit;
+        $_SESSION['ais']['logged'] = array();
+        require_once 'views/ui_login.php';
+        exit;
+
+    } elseif (!empty($_SESSION['ais']['logged'])) {
+        print "<pre>ELSEIF "; print_r($_SESSION); exit;
+        header("Location: index.php");
+
     } else {
-        unset($_SESSION['logged']);
+        //print "<pre>ELSE "; print_r($_SESSION); exit;
+        $_SESSION['ais']['logged'] = array();
         require_once 'views/ui_login.php';
         exit;
     }
 
-    if (!$valid) {
-        logout();
-    }
-
 # Registered Alumni
-} elseif ($_GET['m'] == 'verify') {
-    if (isset($_POST['verify']) && $_POST['verify'] == 'alumni') {
+} elseif ($_GET['m'] == 'register') {
+    $_POST['courses'] = $sql->getCourseList();
+    $_POST['batches'] = $sql->getBatches();
+    //print "<pre>"; print_r($_POST); exit;
+    if (isset($_POST['register']) && $_POST['register'] == 'alumni') {
         //print "<pre>"; print_r($_POST); exit;
         if (empty($_POST['password']) || empty($_POST['password_repeat']) ||
             empty($_POST['firstname']) || empty($_POST['lastname']) || empty($_POST['email'])) {
@@ -62,11 +74,14 @@ if ($_GET['m'] == 'login') {
                 $_POST['danger'] = 'Populate all fields.';
         } else {
             if ($_POST['password'] == $_POST['password_repeat']) {
-                $verified = $sqk_tracker->verifyAlumni($_POST['email'], $_POST['firstname'], $_POST['lastname']);
-                if (!empty($verified)) {
-                    $_SESSION['ais']['register'] = $_POST;
-                    //print "<pre>"; print_r($_POST); exit;
-                    header("Location: index.php?m=register");
+                //print "<pre>"; print_r($_POST); exit; 
+                $user = $sql->createAlumniUser($_POST);
+                //print "<pre>"; var_dump($user); exit; 
+                if ($user == -1) {
+                    $_POST['danger'] = 'You already have an account. Login!';
+                } elseif (!empty($user)) {
+                    $_SESSION['ais']['logged'] = $user;
+                    header("Location: index.php");
                 } else {
                     $_POST['danger'] = 'Alumni data does not exist.';
                 }                        
@@ -76,22 +91,22 @@ if ($_GET['m'] == 'login') {
         }
 
     }
-    require_once 'views/ui_verify_alumni.php';
+    require_once 'views/ui_register.php';
     die();
 
     # Registered Alumni
-} elseif ($_GET['m'] == 'register') {    
-    //print "<pre>"; print_r($_SESSION['ais']); exit;
+} elseif ($_GET['m'] == 'tracker') {    
+    print "<pre>"; print_r($_SESSION['ais']); exit;
     $_POST['courses'] = $sql->getCourseList();
     $_POST['batches'] = array();
-    require_once 'views/ui_register.php';
+    require_once 'views/ui_tracker.php';
     die();
 }
 
 //print "<pre>"; print_r($_GET); exit;
 
 # Login
-if (!isset($_SESSION['ais']['logged'])) {
+if (!(isset($_SESSION['ais']['logged']) && ($_SESSION['ais']['logged'] == ADMIN_USERNAME || $_SESSION['ais']['logged']['First_Name'] != ''))) {
     header("Location: index.php?m=login");
 }
 
@@ -100,8 +115,8 @@ if ($_GET['m'] == 'logout') {
     logout();
 
 # Registered Alumni
-} elseif ($_GET['m'] == 'registered') {
-    require_once 'views/ui_registered.php';
+} elseif ($_GET['m'] == 'registered_alumni') {
+    require_once 'views/ui_registered_alumni.php';
 
 # Announcements
 } elseif ($_GET['m'] == 'announcements') {
@@ -122,11 +137,15 @@ if ($_GET['m'] == 'logout') {
     //print "<pre>"; print_r($_POST['announcement_list']); exit;
     require_once 'views/ui_announcements.php';
     
-# Registered Alumni
+# Employed Graduates
 } elseif ($_GET['m'] == 'employed_graduates') {
     require_once 'views/ui_employed_graduates.php';
 
-# Registered Alumni
+# Dashboard
+} elseif ($_GET['m'] == 'dashboard') {
+    require_once 'views/ui_dashboard.php';
+
+# Outcome Indicator
 } elseif ($_GET['m'] == 'outcome_indicator') {
     require_once 'views/ui_outcome_indicator.php';
 
@@ -167,7 +186,6 @@ if ($_GET['m'] == 'logout') {
                 $created = $sql->addAlumniData($list);
                 $created_info = $created.'/'.count($list);
                 if ($created > 0) {
-                    $_SESSION['batches'] = $sql->getBatches();
                     $_POST['success'] = 'Alumni data  ('.$created_info.') from "'.$_FILES['upload_csv']['name'].'" file have been successfully saved.';      
                     # Get Course and Batch name from the first alumni to be used as default
                     if (isset($list[0]['Course']) && isset($list[0]['Batch'])) {
