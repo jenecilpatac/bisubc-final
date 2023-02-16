@@ -67,6 +67,34 @@ CREATE TABLE users (
   UNIQUE KEY tbl_unique (Alumni_Key),
   KEY tbl_index1 (Email)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table admin_alerts
+--
+CREATE TABLE admin_alerts (
+  Admin_Alert_Key int(10) unsigned NOT NULL auto_increment,
+  Alert text NOT NULL,
+  Alert_Time int(10) NOT NULL,
+  Is_Read int(1) NOT NULL,
+  Alert_Code char(32) NOT NULL,
+  PRIMARY KEY  (Admin_Alert_Key),
+  UNIQUE KEY tbl_unique (Alert_Code)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table alumni_alerts
+--
+CREATE TABLE alumni_alerts (
+  Alumni_Alert_Key int(10) unsigned NOT NULL auto_increment,
+  Alumni_Key int(10) unsigned,
+  Annoucement_Key int(10) unsigned,
+  Is_Read int(1) NOT NULL,
+  PRIMARY KEY  (Alumni_Alert_Key),
+  UNIQUE KEY tbl_unique (Alumni_Key, Annoucement_Key)
+) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+-- --------------------------------------------------------
 
 -- CREATE USER [IF NOT EXISTS] 'bisu'@'localhost' 
 -- IDENTIFIED BY 'B!su';

@@ -22,6 +22,17 @@
                 <i class="fa fa-graduation-cap"></i>
                 <span>Home</span></a>
             </li>
+                
+            <!-- Nav Item - Announcements -->
+            <li class="nav-item
+                <?php if (isset($_GET['m']) && $_GET['m'] == 'announcements'): ?>
+                    active
+                <?php endif; ?>
+            ">
+                <a class="nav-link" href="index.php?m=announcements">
+                <i class="fa fa-bullhorn"></i>
+                <span>Announcements</span></a>
+            </li>
 
             
             <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>                   
@@ -50,6 +61,7 @@
 
             <?php else: ?>    
                 <!-- Nav Item - Dashboard -->
+                <!--
                 <li class="nav-item 
                     <?php if (isset($_GET['m']) && $_GET['m'] == 'dashboard'): ?>
                         active
@@ -59,17 +71,7 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
                 </li>
-                
-                <!-- Nav Item - Announcements -->
-                <li class="nav-item
-                    <?php if (isset($_GET['m']) && $_GET['m'] == 'announcements'): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link" href="index.php?m=announcements">
-                    <i class="fa fa-bullhorn"></i>
-                    <span>Announcements</span></a>
-                </li>
+                -->
 
                 <!-- Divider -->
                 <hr class="sidebar-divider">

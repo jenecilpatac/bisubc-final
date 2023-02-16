@@ -43,21 +43,99 @@ class SQL_Alumni extends DB_Connect {
 
     }
 
+    public function getUnreadAlumniAlertCount($alumni_key) 
+    {
+        $sql = "
+            SELECT count(*) Cnt
+            FROM alumni_alerts as t1
+            WHERE t1.Alumni_Key = $alumni_key        
+                AND Is_Read = 0
+        ";
+        $results = $this->getDataFromTable($sql);
+        $count = 0;
+        foreach ($results as $row) {
+            $count = $row['Cnt'];
+        }
+
+        return $count;
+    }
+
+    public function getAlumniAlerts($alumni_key) 
+    {
+        $sql = "
+            SELECT *,                
+                Date_Format(FROM_UNIXTIME(Time_Stamp), '%M %e, %Y %H:%m') as Date
+            FROM alumni_alerts as t1
+            LEFT JOIN announcements as t2 ON t1.Annoucement_Key = t2.Annoucement_Key    
+            WHERE t1.Alumni_Key = $alumni_key      
+            ORDER BY Is_Read DESC, Time_Stamp DESC
+            LIMIT 5
+        ";
+        $results = $this->getDataFromTable($sql);
+
+        return $results;
+    }
+
+    public function addAlumniAlerts($announcement_key)
+    {
+        $sql = "
+            SELECT * 
+            FROM users
+        ";
+        $results = $this->getDataFromTable($sql);
+        $table = 'alumni_alerts';  
+        foreach ($results as $alumni) {
+            $row = array(
+                'Annoucement_Key' => $announcement_key,
+                'Alumni_Key' => $alumni['Alumni_Key'],
+                'Is_Read' => 0
+            );  
+            //print "<pre>"; print_r($row);
+            $res = $this->insertTableRow($table, array_keys($row), array($row));
+        }        
+    }
+
     public function addAnnouncement($announcement)
     {
         if ($announcement) {
             $table = 'announcements';
+            $code = md5($announcement);
             $data = array();
             $row = array(
                 'Time_Stamp' => time(),
-                'Announcement_Code' => md5($announcement),
+                'Announcement_Code' => $code,
                 'Announcement' => $announcement,
             );
             $data[] = $row;
             $res = $this->insertTableRow($table, array_keys($row), $data);
+            if ($res) {
+                # Add alumni alerts if announcement is saved
+                $announcement_key = $this->getAnnouncementKey($code);
+                //print "<pre>$announcement_key"; 
+                if ($announcement_key > 0) {
+                    $this->addAlumniAlerts($announcement_key);
+                }
+            }
         }
 
         return $res;
+    }
+
+    public function getAnnouncementKey($code)
+    {
+        $sql = "
+            SELECT * 
+            FROM announcements
+            WHERE Announcement_Code = '{$code}'
+            LIMIT 1
+        ";
+        $data = $this->getDataFromTable($sql);
+        $key = 0;
+        foreach ($data as $row) {
+            $key = $row['Annoucement_Key'];
+        }
+
+        return $key;
     }
 
     public function getAnnouncementList()
