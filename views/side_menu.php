@@ -5,8 +5,8 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center m-2" href="index.php">
-                <img src="img/bisu.png" width="75px" alt="">
-                <span class="text-warning pl-2">BISU-BC AIS</span>
+                <img src="img/bisu.png" width="50px" alt="">
+                <span class="text-warning"> &nbsp; BISU-BC AIS</span>
             </a>
 
             <!-- Divider -->
@@ -24,16 +24,28 @@
             </li>
 
             
-            <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>      
-                <!-- Nav Item - Tracer -->
+            <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>                   
+                <!-- Divider -->
+                <hr class="sidebar-divider">
+                <!-- Nav Item - Pages Collapse Menu -->
                 <li class="nav-item
                     <?php if (isset($_GET['m']) && $_GET['m'] == 'tracer'): ?>
                         active
                     <?php endif; ?>
                 ">
-                    <a class="nav-link" href="index.php?m=tracer">                    
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Alumni Tracer</span></a>
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                        aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-folder  text-white"></i>
+                        <span>Alumni Tracer</span>
+                    </a>
+                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Grduate Tracer Survey:</h6>
+                            <a class="collapse-item" href="index.php?m=tracer&profile=1">Profile 1</a>
+                            <a class="collapse-item" href="index.php?m=tracer&profile=2">Profile 2</a>
+                            <a class="collapse-item" href="index.php?m=tracer&profile=3">Profile 3</a>
+                        </div>
+                    </div>
                 </li>
 
             <?php else: ?>    
@@ -87,7 +99,7 @@
 
                 <!-- Heading -->
                 <div class="sidebar-heading">
-                    Manage
+                    Manage Data
                 </div>
 
                 <!-- Nav Item - Courses -->

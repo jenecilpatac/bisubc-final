@@ -125,8 +125,12 @@ class SQL_Alumni extends DB_Connect {
     public function getCoursesTableData()
     {
         $table = array();
-        $table['table_title'] = 'Courses Available';
-        $table['table_headers'] = $this->courses_tbl;
+        $table['table_id'] = 'dataTable'; // 'course_list_tbl';
+        $table['table_headers'] = array(
+            'Department' => 'Department',
+            'Course_Code' => 'Course Code',
+            'Course_Name' => 'Course Name',
+        );
         $table['table_data'] = $this->getCourseList();
 
         return $table;
@@ -326,8 +330,13 @@ class SQL_Alumni extends DB_Connect {
         if ($course_key > 0) {
             $batch_key = $this->getBatchKey($course_key, $_POST['batch_sel']);
             if ($batch_key > 0) {
-                $table['table_title'] = 'Alumni List';
-                $table['table_headers'] = array('Course_Name', 'Batch', 'Last_Name', 'First_Name');
+                $table['table_id'] = 'dataTable'; // 'alumni_list_tbl';
+                $table['table_headers'] = array(
+                    'Course_Name' => 'Course Name', 
+                    'Batch' => 'Batch', 
+                    'Last_Name' => 'Last Name', 
+                    'First_Name' => 'First Name'
+                );
                 $table['table_data'] = $this->getBatchAlumniList($batch_key);
             }
         }

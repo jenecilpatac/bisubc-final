@@ -4,7 +4,7 @@
                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                                     <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>
-                                        <?php echo ucfirst(strtolower($_SESSION['ais']['logged']['First_Name'])) ?>
+                                        <?php echo ucwords(strtolower($_SESSION['ais']['logged']['First_Name'])) ?>
                                     <?php else: ?>
                                         Admin
                                     <?php endif; ?>

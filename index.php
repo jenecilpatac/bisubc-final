@@ -12,8 +12,8 @@ require_once 'helper.php';
 
 require_once 'models/sql_alumni.php';
 $sql = new SQL_Alumni;
-require_once 'models/sql_tracker.php';
-$sql_tracker = new SQL_Tracker;
+require_once 'models/sql_tracer.php';
+$sql_tracer = new SQL_Tracer;
 
 
 if (!isset($_GET['m'])) {
@@ -114,10 +114,6 @@ if (!(isset($_SESSION['ais']['logged']) && ($_SESSION['ais']['logged'] == ADMIN_
 if ($_GET['m'] == 'logout') {
     logout();
 
-# Registered Alumni
-} elseif ($_GET['m'] == 'registered_alumni') {
-    require_once 'views/ui_registered_alumni.php';
-
 # Announcements
 } elseif ($_GET['m'] == 'announcements') {
     if (isset($_POST['save']) && $_POST['save'] == 'announcement') {
@@ -137,8 +133,16 @@ if ($_GET['m'] == 'logout') {
     //print "<pre>"; print_r($_POST['announcement_list']); exit;
     require_once 'views/ui_announcements.php';
     
+# Registered Alumni
+} elseif ($_GET['m'] == 'registered_alumni') {
+    $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData();
+    //print "<pre>"; print_r($_POST['table']); exit;
+    require_once 'views/ui_registered_alumni.php';
+
 # Employed Graduates
 } elseif ($_GET['m'] == 'employed_graduates') {
+    $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData();
+    //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_employed_graduates.php';
 
 # Dashboard
@@ -147,7 +151,21 @@ if ($_GET['m'] == 'logout') {
 
 # Outcome Indicator
 } elseif ($_GET['m'] == 'outcome_indicator') {
+    $_POST['details_table'] = $sql_tracer->getOutcomeIndicatorTableData();
+    $_POST['summary_table'] = $sql_tracer->getOutcomeIndicatorSummaryTableData();
+    //print "<pre>"; print_r($_POST['details_table']); exit;
+    //print "<pre>"; print_r($_POST['summary_table']); exit;
+    $_POST['courses'] = $sql->getCourseList();
+    $_POST['batches'] = $sql->getBatches();
     require_once 'views/ui_outcome_indicator.php';
+
+# Tracer
+} elseif ($_GET['m'] == 'tracer') { 
+    if (!empty($_POST)) {
+        print "<pre>"; print_r($_POST); exit;
+    } 
+    $_POST['disabled_fields'] = array();  
+    require_once 'views/ui_tracer.php';
 
 # Manage Courses
 } elseif ($_GET['m'] == 'manage_courses') {
