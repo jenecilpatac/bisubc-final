@@ -1,8 +1,12 @@
- <!-- Footer -->
- <footer class="sticky-footer>
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
-                        <span></span>
+                        <span>Copyright &copy; BISU - BC Alumni Information System 2023</span>
                     </div>
                 </div>
             </footer>
@@ -10,6 +14,7 @@
 
         </div>
         <!-- End of Content Wrapper -->
+
 
     </div>
     <!-- End of Page Wrapper -->
@@ -33,7 +38,7 @@
                 <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="logout.php">Logout</a>
+                    <a class="btn btn-primary" href="login.html">Logout</a>
                 </div>
             </div>
         </div>
@@ -55,6 +60,10 @@
     <!-- Page level custom scripts -->
     <script src="js/demo/chart-area-demo.js"></script>
     <script src="js/demo/chart-pie-demo.js"></script>
+    <script src="vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+
+    <script src="js/demo/datatables-demo.js"></script>
 
 </body>
 
