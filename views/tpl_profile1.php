@@ -78,7 +78,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                                     <div class="col-sm-9 text-secondary">
                                         <?php if (isset($data['type']) && ($data['type'] == "select")): ?>
                                             <select class="form-control "
-                                                name="<?php echo $field ?>"
+                                                name="<?php echo strtoupper($field) ?>"
                                                 <?php if (isset($_POST['disabled'][$field])): ?>
                                                     disabled
                                                 <?php endif; ?>
@@ -97,7 +97,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                                         <?php else: ?>
                                             <input class="form-control" 
                                                 type="<?php echo $data['type'] ?>"
-                                                name="<?php echo $field ?>"
+                                                name="<?php echo strtoupper($field) ?>"
                                                 <?php if (isset($_POST['disabled'][$field])): ?>
                                                     disabled
                                                 <?php endif; ?>
@@ -144,6 +144,11 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                                         <li class="page-item m-1">                                                
                                             <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
                                                 Next >> 
+                                            </button>
+                                        </li>
+                                        <li class="page-item m-1 pl-3">                                                
+                                            <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                                Save Changes
                                             </button>
                                         </li>
                                     </ul>

@@ -7,10 +7,6 @@
 <!-- Page Heading -->
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
     <h1 class="h3 mb-0 text-gray-800">Announcements</h1>
-    <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-        <i class="fas fa-download fa-sm text-white-50"></i> 
-        Download Report
-    </a>
 </div>
 
     <?php if ($_SESSION['ais']['logged'] == ADMIN_USERNAME): ?>

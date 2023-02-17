@@ -8,25 +8,25 @@
                     <div class="container">                                                        
                         <p>1. Current Employment Status</p>
                         <div class="form-check form-check-inline ml-3">
-                            <input class="form-check-input" type="radio" name="GAINFULLY_EMPLOYED" id="inlineRadio2">
+                            <input class="form-check-input" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio2" value="employed">
                             <label class="form-check-label" for="inlineRadio2"> Gainfully Employed </label>
                             </div>
                             <div class="form-check form-check-inline ml-3">
-                            <input class="form-check-input" type="radio" name="NOT_EMPLOYED" id="inlineRadio1" value="option1">
+                            <input class="form-check-input" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio1" value="not_employed">
                             <label class="form-check-label" for="inlineRadio1"> Not Employed </label>
                             </div>
                             <div class="form-check form-check-inline ml-3">
-                            <input class="form-check-input" type="radio" name="SELF-EMPLOYED" id="inlineRadio2">
+                            <input class="form-check-input" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio2" value="self_employed">
                             <label class="form-check-label" for="inlineRadio2"> Self-Employed </label> 
                             </div>
 
                             <p class="mt-2">2. Number of Job Experiences</p>
                             <div class="form-check form-check-inline ml-3">
-                            <input class="form-check-input" type="radio" name="NEVER_EMPLOYED" id="inlineRadio2">
+                            <input class="form-check-input" type="radio" name="JOB_EXPERIENCES" id="inlineRadio2" value="never_employed" >
                             <label class="form-check-label" for="inlineRadio2">Never been employed (No job Experience except OJT) </label>
                             </div>
                             <div class="form-check ml-3">
-                            <input class="form-check-input" type="radio" name="SINGLE_MULTIPLE" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="JOB_EXPERIENCES" id="flexRadioDefault1" value="single_multiple">
                             <label class="form-check-label" for="flexRadioDefault1"> Single or Multiple Employment (1 or more job experience) </label>
                             </div>  
                                 <p class="mt-3">
@@ -235,29 +235,29 @@
                         
                             <p class="mt-3 ml-3">8. How long did you land your first job after graduation? (Please Choose)</p>
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="A_MONTH" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="0_1month" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">Less than a month</label>
                         </div> 
 
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="2_YEARS" id="inlineRadio2">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="2_3years" id="inlineRadio2">
                             <label class="form-check-label" for="inlineRadio2">2 years to less than 3 years</label>
                         </div>
 
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="6_MONTHS" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="1_6months" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">1 to 6 months</label>
                         </div>  
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="7_MONTHS" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="7months_1year" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">7 months to 1 year</label>
                         </div>  
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="1_YEAR" id="flexRadioDefault1">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="1_2years" id="flexRadioDefault1">
                             <label class="form-check-label" for="flexRadioDefault1">1 year to less than 2 years</label>
                         </div>  
                         <div class="form-check ml-4">
-                            <input class="form-check-input" type="radio" name="8_OTHERS" id="inlineRadio3" value="option3">
+                            <input class="form-check-input" type="radio" name="FIRST_JOB_AFTER_GRAD" value="others" id="inlineRadio3" value="option3">
                             <label class="form-check-label" for="inlineRadio3"> Others, Please Specify
                             </label> 
                             <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0">
@@ -376,12 +376,6 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-3 "></div>
-                        <div class="col-sm-9 text-secondary mt-3">
-                            <input type="button" class="btn btn-primary px-4 btn-warning mb-5" name="SAVE_CHANGES" value="Save Changes">
-                        </div>
-                    </div>
                 </div>
             </div>
             <div class="row">
@@ -412,6 +406,11 @@
                                 <li class="page-item m-1">                                                
                                     <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile3" disabled>
                                         Next >> 
+                                    </button>
+                                </li>
+                                <li class="page-item m-1 pl-3">                                                
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                        Save Changes
                                     </button>
                                 </li>
                             </ul>

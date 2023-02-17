@@ -156,6 +156,11 @@
                                         Next >> 
                                     </button>
                                 </li>
+                                <li class="page-item m-1 pl-3">                                                
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                        Save Changes
+                                    </button>
+                                </li>
                             </ul>
                         </nav>
                     </div>                        
