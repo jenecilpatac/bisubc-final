@@ -12,7 +12,7 @@
                             <h6 class="mb-0">Educational Attainment (Baccalaurete Degree Only)</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select name="educational attainment" tabindex="-1" class="form-control form-control-user select2-hidden-accessible" aria-hidden="true" >
+                            <select name="COURSE" tabindex="-1" class="form-control form-control-user select2-hidden-accessible" aria-hidden="true" >
                                 
                                 <option>Bachelor of Science in Information Technology</option>
                                 <option>Bachelor of Science in Computer Science</option>
@@ -27,7 +27,7 @@
                             <h6 class="mb-0">Year Graduated</h6>
                         </div>
                         <div class="col-sm-9 text-secondary">
-                            <select name="year_graduated" tabindex="-1" class="form-control form-control-user select2-hidden-accessible" aria-hidden="true" >
+                            <select name="BATCH" tabindex="-1" class="form-control form-control-user select2-hidden-accessible" aria-hidden="true" >
                                 
                                 <option>2015</option>
                                 <option>2016</option>
@@ -103,23 +103,23 @@
                         
                         <p >2. What made you pursue advance studies?</p>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+                            <input class="form-check-input" type="radio" name="FOR_PROMOTION" id="inlineRadio1" value="option1">
                             <label class="form-check-label" for="inlineRadio1">
                                 For Promotion
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+                            <input class="form-check-input" type="radio" name="FOR_PROFDEV" id="inlineRadio2" value="option2">
                             <label class="form-check-label" for="inlineRadio2">
                                 For Professional Development
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
+                            <input class="form-check-input" type="radio" name="2_OTHERS" id="inlineRadio3" value="option3">
                             <label class="form-check-label" for="inlineRadio3">
                                 Others, Please Specify
                             </label> 
-                            <input type="text" style="border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style:groove ;"id="usr">
+                            <input type="text" name="2.1_OTHERS" style="border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style:groove ;"id="usr">
                         </div>
                     
                     
