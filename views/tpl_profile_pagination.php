@@ -8,12 +8,12 @@
                     <li class="page-item disabled">
                     <span class="page-link">Previous</span>
                     </li>
-                    <li class="page-item"><a class="page-link" href="ui_profile1.php">1</a></li>
+                    <li class="page-item"><a class="page-link" href="index.php?m=tracer&profile=1">1</a></li>
 
-                    <li class="page-item"><a class="page-link" href="ui_profile2.php">2</a></li>
+                    <li class="page-item"><a class="page-link" href="index.php?m=tracer&profile=2">2</a></li>
                     <li class="page-item">
 
-                    <li class="page-item"><a class="page-link" href="ui_profile3.php">3</a></li>
+                    <li class="page-item"><a class="page-link" href="index.php?m=tracer&profile=3">3</a></li>
                     <li class="page-item">
                     <a class="page-link" href="ui_profile2.php">Next</a>
                     </li>

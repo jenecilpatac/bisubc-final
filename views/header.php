@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link href="img/bisu_logo.png" rel="icon">
+    <link href="img/bisu.png" rel="icon">
     <title>Alumni Information System of BISU Balilihan </title>
 
     <!-- Custom fonts for this template-->
