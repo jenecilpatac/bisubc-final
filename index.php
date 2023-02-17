@@ -176,7 +176,7 @@ if ($_GET['m'] == 'logout') {
 # Tracer
 } elseif ($_GET['m'] == 'tracer') { 
     if (!empty($_POST)) {
-        print "<pre>"; print_r($_POST); exit;
+        //print "<pre>"; print_r($_POST); exit;
     } 
     $_POST['disabled_fields'] = array();  
     require_once 'views/ui_tracer.php';
