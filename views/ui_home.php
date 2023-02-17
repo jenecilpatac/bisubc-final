@@ -6,7 +6,7 @@
 
     <!-- Begin Page Content -->
     <div class="container-fluid">
-        <img src="img/homepage.png" width="100%" alt="">
+        <img src="img/homepage.jpg" width="100%" alt="">
     </div>
     <!-- /.container-fluid -->
 
