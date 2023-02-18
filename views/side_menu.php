@@ -29,7 +29,7 @@
                     active
                 <?php endif; ?>
             ">
-                <a class="nav-link" href="index.php?m=announcements">
+                <a class="nav-link" href="sh bi ">
                 <i class="fa fa-bullhorn"></i>
                 <span>Announcements</span></a>
             </li>

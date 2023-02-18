@@ -39,6 +39,18 @@ class SQL_Tracer extends DB_Connect {
         ";
         $results = $this->getDataFromTable($sql);
         //print "<pre>$sql"; print_r($results); exit;
+        $results = array();
+        for ($i=0; $i< 20; $i++) {
+            $results[] = array(
+                'Name' => 'Name',
+                'Address' => 'Address',
+                'Email' => 'Email',
+                'Employment_Status' => 'Status',
+                'Company_Name' => 'Name of Company',
+                'Position' => 'Position',
+                'Awards_Received' => 'Awards Received',
+            );
+        }
 
         return $results;
     }
