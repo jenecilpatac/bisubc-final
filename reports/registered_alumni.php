@@ -13,16 +13,17 @@ $pdf->SetFont('Arial','B',12);  // Arial bold 15
 $pdf->Cell(30); // Move to the right
 $pdf->Cell(0,0,'Registered Alumni',0,0,'C');
 
-$pdf->Ln(); // Line break
+$pdf->Ln(5); // Line break
 
 // Column headings
-$header = array('Name', 'Address', 'Email', 'Status', 'Name of Company', 'Position', 'Awards');
-$pdf->MultiCell(0 w, 0 h, string $header [0 border ['C' align [false fill]]])
+$header = array("Name", 'Address', 'Email', 'Status', 'Name of Company', 'Position', 'Awards');
+$width = array(45, 45, 40, 25, 40, 35, 50);
+//$pdf->MultiCell(0, 0, string $header)
 // Data loading
 $data = $pdf->LoadData('registered_alumni.txt');
-$pdf->SetFont('Arial','',12);
-$pdf->BasicTable($header,$data);
-$pdf->MultiCell(0 w, 0 h, string $data [0 border ['C' align [false fill]]])
+$pdf->SetFont('Arial','',10);
+$pdf->BasicTable($header, $data, $width);
+//$pdf->MultiCell(0, 0, string $data)
 
 $pdf->PrepareBy();
 

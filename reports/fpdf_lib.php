@@ -86,17 +86,22 @@ class PDF extends FPDF
     }
 
     // Simple table
-    function BasicTable($header, $data)
+    function BasicTable($header, $data, $width=array())
     {
         // Header
-        foreach($header as $col)
-            $this->Cell(70,7,$col,1,0,'C');
+        foreach($header as $i=> $col) {
+            $col_w = isset($width[$i]) ? $width[$i] : 70;
+            $this->Cell($col_w,7,$col,1,0,'C');
+            //$this->MultiCell($col_w,7,$col);
+            //$this->MultiCell(70,7,$col,1,'C');
+        }
         $this->Ln();
         // Data
-        foreach($data as $row)
-        {
-            foreach($row as $col)
-                $this->Cell(70,6,$col,1);
+        foreach($data as $row) {
+            foreach($row as $i => $col) {
+                $col_w = isset($width[$i]) ? $width[$i] : 70;
+                $this->Cell($col_w,6,$col,1);
+            }
             $this->Ln();
         }
     }
