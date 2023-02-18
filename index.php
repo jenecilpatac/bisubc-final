@@ -92,6 +92,7 @@ if ($_GET['m'] == 'login') {
         }
 
     }
+    
     require_once 'views/ui_register.php';
     die();
 
@@ -151,6 +152,8 @@ if ($_GET['m'] == 'logout') {
 } elseif ($_GET['m'] == 'registered_alumni') {
     $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData();
     //print "<pre>"; print_r($_POST['table']); exit;
+    $_POST['courses'] = $sql->getCourseList();
+    $_POST['batches'] = $sql->getBatches();
     require_once 'views/ui_registered_alumni.php';
 
 # Employed Graduates
@@ -178,6 +181,8 @@ if ($_GET['m'] == 'logout') {
     if (!empty($_POST)) {
         //print "<pre>"; print_r($_POST); exit;
     } 
+    $_POST['courses'] = $sql->getCourseList();
+    $_POST['batches'] = $sql->getBatches();
     $_POST['disabled_fields'] = array();  
     require_once 'views/ui_tracer.php';
 

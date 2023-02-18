@@ -81,7 +81,7 @@ class PDF extends FPDF
         $lines = file($file);
         $data = array();
         foreach($lines as $line)
-            $data[] = explode(';',trim($line));
+            $data[] = explode('|',trim($line));
         return $data;
     }
 
@@ -90,13 +90,13 @@ class PDF extends FPDF
     {
         // Header
         foreach($header as $col)
-            $this->Cell(40,7,$col,1,0,'C');
+            $this->Cell(70,7,$col,1,0,'C');
         $this->Ln();
         // Data
         foreach($data as $row)
         {
             foreach($row as $col)
-                $this->Cell(40,6,$col,1);
+                $this->Cell(70,6,$col,1);
             $this->Ln();
         }
     }

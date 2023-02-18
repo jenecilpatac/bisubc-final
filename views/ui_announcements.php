@@ -5,10 +5,6 @@
 ?>
 
 <!-- Page Heading -->
-<div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Announcements</h1>
-</div>
-
     <?php if ($_SESSION['ais']['logged'] == ADMIN_USERNAME): ?>
         <!-- Outer Row -->
         <div class="row justify-content-center">

@@ -377,8 +377,9 @@
                             
                             <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0">
                         </div>
-                        <p class="mt-3">3.If you answered Yes, please upload a picture/document of your certificate or plaque of recognition.</p>
-                            <div class="btn btn-primary btn-rounded btn-warning">
+                        <p class="mt-3">3.If you answered Yes, indicate the name and please upload a picture/document of your certificate or plaque of recognition.</p>
+                        <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0">
+                        <div class="btn btn-primary btn-rounded btn-warning">
                                 <label class="form-label text-white m-1" for="customFile2">Choose file</label>
                                 <input type="file" class="form-control d-none" name="CHOOSE_FILE" id="customFile2" value="choose_file" />
                             </div>

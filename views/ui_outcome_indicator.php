@@ -14,7 +14,7 @@
     </div>
     
     <!-- Begin Page Content -->
-    <div class="container-fluid">
+    <div class="container-fluid mb-4">
         <!-- Outer Row -->
         <div class="row justify-content-center">
             <form action="index.php?m=manage_alumni" method="POST" enctype="multipart/form-data">

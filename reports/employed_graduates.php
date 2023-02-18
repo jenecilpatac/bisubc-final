@@ -9,15 +9,22 @@ $pdf->AddPage('L', 'A4');
 $pdf->HeaderLogo();
 $pdf->SetFont('Times','',12);
 
-$pdf->Cell(0,10,'BOHOL ISLAND STATE UNIVERSITY - BALILIHAN CAMPUS',0,1);
-$pdf->Cell(0,10,'Number of Employed Graduates by Campus',0,1);
-$pdf->Cell(0,10,'ACADEMIC YEAR 2019-2020',0,1);
 
+$pdf->SetFont('Arial','B',12);  // Arial bold 15        
+$pdf->Cell(30); // Move to the right
+$pdf->Cell(0,0,'Number of Employed Graduates',0,0,'C');
+$pdf->Ln(6); // Line break
+$pdf->SetFont('Arial','',12);    
+$pdf->Cell(30);
+$pdf->Cell(0,0,'Academic Year 2019-2020',0,0,'C');
+$pdf->Ln(10); 
 // Column headings
-$header = array('Country', 'Capital', 'Area (sq km)', 'Pop. (thousands)');
+$header = array('Course', 'No. of Graduates', 'No. of Graduates hired w/ in 2 years after graduation', 'Percentage');
+$pdf->MultiCell(0 w, 0 h, string $header [0 border ['C' align [false fill]]])
 // Data loading
-$data = $pdf->LoadData('../fpdf/tutorial/countries.txt');
-$pdf->SetFont('Arial','',14);
+$data = $pdf->LoadData('employed_graduates.txt');
+$pdf->MultiCell(0 w, 0 h, string $data [0 border ['C' align [false fill]]])
+$pdf->SetFont('Arial','',12);
 $pdf->BasicTable($header,$data);
 
 $pdf->PrepareBy();
