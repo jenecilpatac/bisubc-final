@@ -19,13 +19,16 @@ $pdf->Cell(30);
 $pdf->Cell(0,0,'Academic Year 2019-2020',0,0,'C');
 $pdf->Ln(10); 
 // Column headings
-$header = array('Course', 'No. of Graduates', 'No. of Graduates hired w/ in 2 years after graduation', 'Percentage');
-$pdf->MultiCell(0 w, 0 h, string $header [0 border ['C' align [false fill]]])
+
+$header[0] = array('Course', 'No. of Graduates', 'No. of Graduates hired', 'Percentage');
+$header[1] = array(" ", ' ', 'w/ in 2 years after graduation', ' ');
+$width = array(80, 30, 60, 60);
+//$pdf->MultiCell(0, 0, string $header)
 // Data loading
 $data = $pdf->LoadData('employed_graduates.txt');
-$pdf->MultiCell(0 w, 0 h, string $data [0 border ['C' align [false fill]]])
-$pdf->SetFont('Arial','',12);
-$pdf->BasicTable($header,$data);
+$pdf->SetFont('Arial','',10);
+$pdf->SetLeftMargin(30); 
+$pdf->BasicTable($header, $data, $width);
 
 $pdf->PrepareBy();
 

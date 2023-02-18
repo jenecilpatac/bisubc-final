@@ -18,7 +18,7 @@ $pdf->Ln(5); // Line break
 // Column headings
 $header = array();
 $header[0] = array("Name", 'Address', 'Email', 'Status', 'Name of Company', 'Position', 'Awards');
-$header[1] = array("Name", 'Address', 'Email', 'Status', 'Name of Company', 'Position', 'Awards');
+$header[1] = array(" ", ' ', ' ', ' ', ' ', ' ', ' ');
 $width = array(45, 45, 40, 25, 40, 35, 50);
 //$pdf->MultiCell(0, 0, string $header)
 // Data loading

@@ -19,14 +19,16 @@ $pdf->Cell(0,0,'Academic Year 2019-2020',0,0,'C');
 $pdf->Ln(10); 
 
 // Column headings
-$header = array('Name of Graduates','Status','Company Name/Business Type','Supporting Documents');
-$pdf->MultiCell(0 w, 0 h, string $header [0 border ['C' align [false fill]]])
+$header[0] = array('Name of Graduates','Status','Company Name/Business Type','Supporting Documents');
+$header[1] = array(" ", ' ', ' ', ' ');
+$width = array(60, 60, 60, 60);
+//$pdf->MultiCell(0, 0, string $header)
 // Data loading
 $data = $pdf->LoadData('outcome_indicator.txt');
-$pdf->MultiCell(0 w, 0 h, string $data [0 border ['C' align [false fill]]])
-$pdf->SetFont('Arial','',12);
-$pdf->BasicTable($header,$data);
-
+$pdf->SetFont('Arial','',10);
+$pdf->SetLeftMargin(30); 
+$pdf->BasicTable($header, $data, $width);
+//$pdf->MultiCell(0, 0, string $data)
 $pdf->PrepareBy();
 
 $pdf->Output();

@@ -44,7 +44,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                             <!--Avatar-->
                             <div>
                                 <div class="d-flex justify-content-center mb-4">
-                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+                                <img src="img/blank-profile-picture.png" alt="Admin" class="rounded-circle p-1 bg-primary" width="130">
                                 </div>
                                 <div class="d-flex justify-content-center">
                                     <div class="btn btn-primary btn-rounded btn-warning">
