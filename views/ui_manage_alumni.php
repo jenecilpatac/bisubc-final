@@ -17,18 +17,18 @@
     <div class="row justify-content-center">
         <form action="index.php?m=manage_alumni" method="POST" enctype="multipart/form-data">
             <div class="row g-3 p-10 mt-2">
-                <div class="col-8">
+                <div class="col-6">
                     <div class="form-floating">
                         <label for="upload_csv">Select CSV file to uplaod alumni:</label>
                         <input type="file" name="upload_csv" accept="text/tsv" class="form-control form-control-lg" id="upload_csv" />
                     </div>
                 </div>
-                <div class="col-4 text-center mt-4 mb-2 form-floating">
+                <div class="col-2 text-center mt-4 mb-2 form-floating">
                     <button class="btn btn-primary btn-user btn-block mb-3 btn-warning py-3 px-2" type="submit" name="save" value="alumni">
                         Upload Alumni
                     </button>
                 </div>
-                <div class="col-8 mt-3">
+                <div class="col-6 mt-3">
                     <div class="form-floating">
                         <label for="course_code">Course:</label>                        
                         <select class="form-control selectpicker"  id="course" name="course">
@@ -44,7 +44,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-4 mt-3">
+                <div class="col-2 mt-3">
                     <div class="form-floating">
                         <label for="course_code">Batch:</label>                        
                         <select class="form-control selectpicker"  id="batch" name="batch">
@@ -60,8 +60,8 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-12 text-center mt-4 mb-2 form-floating">
-                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning py-3 px-5" type="submit" name="view" value="alumni"
+                <div class="col-2 text-center mt-4 mb-2 form-floating">
+                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning py-3 px-4" type="submit" name="view" value="alumni"
                         <?php if (empty($_POST['courses']) || empty($_POST['batches'])): ?>
                             disabled
                         <?php endif; ?>
@@ -74,7 +74,7 @@
     </div>
     <!-- End -->
                 
-<?php require_once 'views/tpl_table.php'; ?>
+    <?php require_once 'views/tpl_table.php'; ?>
 
 </div>
 <!-- /.container-fluid -->
