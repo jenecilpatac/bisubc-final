@@ -15,9 +15,9 @@
     <!-- Page Heading -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
         <h5 class="h5 mb-0 text-gray-800"><strong>Employed Graduates</strong></h5>
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="./reports/employed_graduates.php"  target="_blank"  class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-download fa-sm text-white-50"></i> 
-            Download Report
+            Generate Report
         </a>
     </div>
 
