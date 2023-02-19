@@ -9,7 +9,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Manage Alumni</h1>
+    <h5 class="h5 mb-0 text-gray-800"><strong>Manage Alumni</strong></h5>
 
     <?php require_once 'views/tpl_alert_msg.php' ?>
 
@@ -28,7 +28,7 @@
                         Upload Alumni
                     </button>
                 </div>
-                <div class="col-6 mt-3">
+                <div class="col-6 mt-2">
                     <div class="form-floating">
                         <label for="course_code">Course:</label>                        
                         <select class="form-control selectpicker"  id="course" name="course">
@@ -69,6 +69,12 @@
                         View Alumni
                     </button>
                 </div>
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-download fa-sm text-white-50"></i> 
+            Download Report
+        </a>
+    </div>
             </div>
         </form>
     </div>

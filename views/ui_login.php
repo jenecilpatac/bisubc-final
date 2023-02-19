@@ -13,17 +13,19 @@
                 <div class="card-body p-0">
                     <!-- Nested Row within Card Body -->
                     <div class="row">
-                        <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
-                        <div class="col-lg-6">
+                        <div class="col-lg-6 d-none d-lg-block">
+                        <img src="img/login (2).jpg" class="mx-my-auto d-block">
+                        </div>
+                        <div class="col-lg-5 mt-5 d-flex justify-content-center">
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">
+                                    <h1 class="h4 text-warning -900 mb-4"><strong>
                                         <?php if (isset($_GET['type']) && $_GET['type'] == 'admin'): ?>
                                             Welcome Admin!
                                         <?php else: ?>
                                             Welcome Alumnus/Alumna!
                                         <?php endif; ?>
-                                    </h1>
+                                        </strong></h1>
                                     <?php require_once 'views/tpl_alert_msg.php'; ?>              
                                 </div>
                                 <form class="user" action="index.php?m=login" method="POST">

@@ -1,5 +1,4 @@
 
-<div class="container">
     <div class="main-body">
         <form action="index.php?m=tracer&profile=2" method="POST" enctype="multipart/form-data">        
             
@@ -114,7 +113,7 @@
                                 For Professional Development
                             </label>
                         </div>
-                        <div class="form-check form-check-inline">
+                        <div class="form-check form-check-inline mb-4">
                             <input class="form-check-input" type="radio" name="PURSUE_ADVANCE_STUDIES" id="inlineRadio3" value="others">
                             <label class="form-check-label" for="inlineRadio3">
                                 Others, Please Specify
@@ -128,7 +127,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="mt-5 col-sm-0 text-secondary d-flex justify-content-center">
+                    <div class="mt-3 col-sm-0 text-secondary d-flex justify-content-center">
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item m-1">
@@ -169,4 +168,3 @@
 
         </form>
     </div>
-</div>

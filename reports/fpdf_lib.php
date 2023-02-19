@@ -36,7 +36,7 @@ class PDF extends FPDF
     // Page header
     function PrepareBy()
     {        
-        $this->Ln(15); // Line break
+        $this->Ln(10); // Line break
         $this->SetFont('Arial','B',12); // Arial bold 15     
         $this->Cell(0,0,'Prepared By:',0,1);
 
@@ -49,15 +49,21 @@ class PDF extends FPDF
         $this->SetFont('Arial','B',12); // Arial bold 15     
         $this->Cell(-150,10,'JOCELYN P. LUMACTUD',0,0,'R');
         $this->Cell(100);
-        $this->Cell(1,10,'JEAN F. NEBREA',0,0,'R');
+        $this->Cell(1,10,'DR. BENJAMIN N. OMAMALIN',0,0,'R');
         $this->SetFont('Arial','',12); // Arial bold 15     
         $this->Ln($line_space); 
         $this->Cell(0,10,'Designation',0,0); 
         $this->Cell(-145,10,'Chair, Student Affirs & Services',0,0,'R');
-        $this->Cell(93);
-        $this->Cell(1,10,'Campus Director',0,0,'R');
+        $this->Cell(93); 
+        $this->Cell(1,10,'CTAS Dean',0,0,'R');
         $this->SetFont('Arial','B',12); // Arial bold 15  
-
+        $this->Ln(25); 
+        $this->SetLeftMargin(135); 
+        $this->SetFont('Arial','B',12); // Arial bold 15     
+        $this->Cell(0,0,'JEAN F. NEBREA',0,1);
+        $this->SetFont('Arial','',12);   
+        $this->Cell(0,10,'Campus Director',0,0);
+        $this->SetLeftMargin(40); 
         $this->Ln(15); 
         $this->SetFont('Arial','B',12); // Arial bold 15     
         $this->Cell(0,0,'HIGHER EDUCATION PROGRAM',0,1);

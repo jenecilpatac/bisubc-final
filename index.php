@@ -43,7 +43,7 @@ if ($_GET['m'] == 'login') {
                 exit;
             }
         } else {
-            $_POST['danger'] = "Populate all fields.";
+            $_POST['danger'] = "Please fill up all fields.";
         }        
         //print "<pre>ISSET "; print_r($_SESSION); exit;
         $_SESSION['ais']['logged'] = array();

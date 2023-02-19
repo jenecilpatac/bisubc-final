@@ -30,7 +30,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
 
 ?>
 
-<div class="container">
+
     <div class="main-body">    
         <form action="index.php?m=tracer&profile=1" method="POST" enctype="multipart/form-data">
 
@@ -161,4 +161,3 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
         
         </form>
     </div>
-</div>

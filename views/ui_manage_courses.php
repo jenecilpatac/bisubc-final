@@ -9,7 +9,7 @@
 <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-2 text-gray-800">Manage Courses</h1>
+    <h5 class="h5 mb-0 text-gray-800"><strong>Manage Courses</strong></h5>
 
     <?php require_once 'views/tpl_alert_msg.php' ?>
 
@@ -17,7 +17,7 @@
     <div class="row justify-content-center">
         <form action="index.php?m=manage_courses" method="POST">
             <div class="row g-3 p-10 mt-4">
-                <div class="col-12">
+                <div class="col-9">
                     <div class="form-floating">
                         <label for="department">Department:</label>
                         <select class="form-control selectpicker"  id="department" name="Department">
@@ -39,14 +39,14 @@
                         <input type="text" class="form-control" id="course_code" name="Course_Code" placeholder="Enter Course Code">
                     </div>
                 </div>
-                <div class="col-8 mt-3">
+                <div class="col-5 mt-3">
                     <div class="form-floating m-0">
                         <label for="course_name">Course Name:</label>
                         <input type="text" class="form-control" id="course_name" name="Course_Name" placeholder="Enter Course Name">
                     </div>
                 </div>
-                <div class="col-12 text-center mt-4 mb-2 form-floating">
-                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning py-3 px-5" type="submit" name="save" value="course"
+                <div class="col-2 text-center mt-4 mb-2 form-floating">
+                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning py-3 px-2" type="submit" name="save" value="course"
                         <?php if (empty($_DEPARTMENTS)): ?>
                             disabled
                         <?php endif; ?>

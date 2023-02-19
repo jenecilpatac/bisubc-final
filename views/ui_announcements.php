@@ -14,7 +14,7 @@
                         <!-- Nested Row within Card Body -->
                         <div class="row">
                             <div class="logo">
-                                <img src="img/bisu_logo.png" width="250px"  alt="" style="float: left; margin-left: 100px; margin-top:30px" >
+                                <img src="img/bisu_logo.png" width="250px" class="mx-5 my-1" alt="" style="float: left;">
                             </div>
                             <div class="col-lg-6">
                                 <div class="p-8">
@@ -22,7 +22,7 @@
                                         <h1 class="h4 text-warning -900 mb-4 mt-3">ANNOUNCEMENT</h1>
                                     </div>
                                     <form class="user" action="index.php?m=announcements" method="POST">
-                                        <div class="form-group">
+                                        <div class="form-group mx-3">
                                             <div class="form-outline">
                                                 <textarea class="form-control" name="announcement" id="textAreaExample1" rows="4" placeholder="Write Announcement..."></textarea>
                                             </div>

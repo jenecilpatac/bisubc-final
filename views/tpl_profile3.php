@@ -1,4 +1,4 @@
-<div class="container">
+
     <div class="main-body">
         <form action="index.php?m=tracer&profile=3" method="POST" enctype="multipart/form-data">   
 
@@ -127,80 +127,66 @@
                                 <label class="form-check-label" for="inlineRadio4" >No</label>
                             </div>
 
-                            <div class="container"> 
-                            <table class="table">
-                            <thead>
-                                <tr>
-                                <th>5.Employment Status</th>
-                                    <th style="padding-left:3%">First Job</th>
-                                <th style="padding-left:15%">Current or Present Job</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                <td>Regular or Permanent</td>
-                                <td><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3" value="regular"></td>
-                                <td style="padding-left:15%"><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3"></td>
-                                <td></td>
-                                </tr>
-                                <tr>
-                                <td>Contractual</td>
-                                <td><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3" value="contractual"></td>
-                                <td style="padding-left:15%"><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3"></td>
-                                </tr>
-                                <tr>
-                                <td>Temporary</td>
-                                <td><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3" value="temporary"></td>
-                                <td style="padding-left:15%"><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3"  ></td>
-                                </tr>
-                                <tr>
-                                <td>Casual</td>
-                                <td><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3" value="casual"></td>
-                                <td style="padding-left:15%"><input class="form-check-input ml-5" type="radio" name="EMPLOYMENT" id="inlineRadio3"></td>
-                                </tr>
-                                
-                            </tbody>
-                            </table>
-                        </div>
+                            <div class="row ml-1 mt-3">
+                              <div class="col-4 mb-3">5. <b>Employment Status</b></div>
+                              <div class="col-4"><b>First Job</b></div>
+                              <div class="col-4"><b>Current or Present Job</b></div>
+                            </div>
+                            <div class="row mb-3 ml-1">
+                              <div class="col-4">Regular or Permanent</div>
+                              <div class="col-4"><input class="form-check-input ml-3" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio3" value="regular_permanent"></div>
+                              <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                            </div>
+                            <div class="row mb-3 ml-1">
+                              <div class="col-4">Contractual</div>
+                              <div class="col-4"><input class="form-check-input ml-3" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio3" value="contractual"></div>
+                              <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                            </div>
+                            <div class="row mb-3 ml-1">
+                              <div class="col-4">Temporary</div>
+                              <div class="col-4"><input class="form-check-input ml-3" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio3" value="temporary"></div>
+                              <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                            </div>
+                            <div class="row mb-3 ml-1">
+                              <div class="col-4">Casual</div>
+                              <div class="col-4"><input class="form-check-input ml-3" type="radio" name="EMPLOYMENT_STATUS" id="inlineRadio3" value="casual"></div>
+                              <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                            </div>
+                            
 
-                        <div class="container"> 
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>6.Job Level</th>
-                                        <th>First Job</th>
-                                        <th>Current or Present Job</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                    <td>Rank or Clerical</td>
-                                    <td><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="first_rank"></td>
-                                    <td><input class="form-check-input ml-5" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="curent_rank"></td>
-                                    <td></td>
-                                    </tr>
-                                    <tr>
-                                    <td>Professional or Supervisory</td>
-                                    <td><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="first_professional"></td>
-                                    <td><input class="form-check-input ml-5" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="curent_professional"></td>
-                                    </tr>
-                                    <tr>
-                                    <td>Managerial or Executive</td>
-                                    <td><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="first_managerial"></td>
-                                    <td><input class="form-check-input ml-5" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="curent_managerial"></td>
-                                    </tr>
-                                    <tr>
-                                    <td>Self-employed</td>
-                                    <td><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="first_self"></td>
-                                    <td><input class="form-check-input ml-5" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="curent_self"></td>
-                                    </tr>
-                                    <tr>
-                                    <td>If self-employed, what line of business?</td>
-                                    <td>  <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0 " name="SELF_EMPLOYED"></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
+                              <div class="row ml-1">
+                                <div class="col-4 mb-3">6. <b>Job Level</b></div>
+                                <div class="col-4"><b>First Job</b></div>
+                                <div class="col-4"><b>Current or Present Job</b></div>
+                              </div>
+                              <div class="row mb-3 ml-1">
+                                <div class="col-4">Rank or Clerical</div>
+                                <div class="col-4"><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="rank_clerical"></div>
+                                <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                              </div>
+                              <div class="row mb-3 ml-1">
+                                <div class="col-4">Professional or Supervisory</div>
+                                <div class="col-4"><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="professional"></div>
+                                <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                              </div>
+                              <div class="row mb-3 ml-1">
+                                <div class="col-4">Managerial or Executive</div>
+                                <div class="col-4"><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="managerial_executive"></div>
+                                <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                              </div>
+                              <div class="row mb-3 ml-1">
+                                <div class="col-4">Self-employed</div>
+                                <div class="col-4"><input class="form-check-input ml-3" type="radio" name="JOB_LEVEL" id="inlineRadio3" value="self_employed"></div>
+                                <div class="col-4"><input class="form-check-input ml-5" type="radio" name="inlineRadioOptions" id="inlineRadio3"></div>
+                              </div>
+                              <div class="row mb-3 ml-1">
+                                <div class="col-4">If self-employed, what line of business?</div>
+                                <div class="col-4"><input type="text" name="JOB_LEVEL" style="border-top-style: hidden; border-right-style: hidden; border-left-style: hidden; border-bottom-style:groove ;"id="usr"></div>
+                             </div>
+
+
+
+
                        
                         <p class="mt-3 ml-3">7. How did you find your first job? (Please Choose)</p>
                         <div class="form-check ml-4">
@@ -389,7 +375,7 @@
             </div>
             <div class="row">
                 <div class="col-sm-12">
-                    <div class="mt-5 col-sm-0 text-secondary d-flex justify-content-center">
+                    <div class="mt-4 col-sm-0 text-secondary d-flex justify-content-center">
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item m-1">
@@ -430,4 +416,3 @@
                 
         </form>
     </div>
-</div>

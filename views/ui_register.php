@@ -8,11 +8,13 @@
         <div class="card-body p-0">
             <!-- Nested Row within Card Body -->
             <div class="row">
-                <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                <div class="col-lg-7">
-                    <div class="p-5">
+                <div class="col-lg-5 d-none d-lg-block">
+                <img src="img/register (1).jpg" class="mx-my-auto d-block">
+                </div>
+                <div class="col-lg-7 ">
+                    <div class="pl-0 pr-5 py-5">
                         <div class="text-center">
-                            <h1 class="h4 text-gray-900 mb-4">Create an Account!</h1>
+                            <h4 class="h4 text-warning -900 mb-4"><strong>Create an Account!</strong></h4>
                             <?php require_once 'views/tpl_alert_msg.php'; ?>                    
                         </div>
                         <form class="user" action="index.php?m=register" method="POST">
