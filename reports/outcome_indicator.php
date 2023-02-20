@@ -16,6 +16,10 @@ $pdf->Ln(6); // Line break
 $pdf->SetFont('Arial','',12);    
 $pdf->Cell(25);
 $pdf->Cell(0,0,'Academic Year 2019-2020',0,0,'C');
+$pdf->Ln(8); // Line break
+$pdf->SetFont('Arial','',12);    
+$pdf->Cell(25);
+$pdf->Cell(0,0,'BS Information Technology',0,0,'C');
 $pdf->Ln(10); 
 
 // Column headings

@@ -29,7 +29,12 @@ $fields['Birthday'] = array('label' => 'Birthday', 'type' => 'date');
 $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type' => 'text');
 
 ?>
-
+        <div class="d-sm-flex align-items-center justify-content-between mb-4" style="float:right;">
+        <a href="./reports/profile_cv.php"  target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+            <i class="fas fa-download fa-sm text-white-50"></i> 
+            Download Profile
+        </a>
+    </div>
 
     <div class="main-body">    
         <form action="index.php?m=tracer&profile=1" method="POST" enctype="multipart/form-data">
@@ -54,7 +59,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                                 </div>
                             </div>
                                 <div class="mt-3">
-                                    <h4>John Doe</h4>
+                                    <h4>Lea Joy Karaan</h4>
                                     <p class="text-secondary mb-1">Full Stack Developer</p>
                                     <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                                     

@@ -70,9 +70,9 @@
                     </button>
                 </div>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+        <a href="./reports/alumni_list.php"  target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
             <i class="fas fa-download fa-sm text-white-50"></i> 
-            Download Report
+            Download
         </a>
     </div>
             </div>
