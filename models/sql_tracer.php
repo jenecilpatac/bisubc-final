@@ -29,6 +29,40 @@ class SQL_Tracer extends DB_Connect {
         'PURSUE_ADVANCE_STUDIES_OTHERS',
     );
 
+    public $profile3_fields = array(
+        'EMPLOYMENT_STATUS',
+        'JOB_EXPERIENCES',
+        'NEVER_EMPLOYED',
+        'NEVER_EMPLOYED_OTHERS',
+        'LOCAL_ABROAD',
+        'NAME_COMPANY',
+        'ADDRESS_COMPANY',
+        'CONTACT_COMPANY',
+        'SUPPORTING_DOCUMENT',
+        'SUPPORTING_DOC_FILE',
+        'LINE_BUSINESS',
+        'POSITION',
+        'WORK_ALIGNED',
+        'STATUS_FIRST_JOB',
+        'STATUS_CURRENT_JOB',
+        'LEVEL_FIRST_JOB',
+        'LEVEL_CURRENT_JOB  ',
+        'SELF_EMPLOYED_LINE',
+        'FIND_FIRST',
+        'FIND_FIRST_OTHERS',
+        'FIRST_JOB_AFTER_GRAD',
+        'FIRST_JOB_AFTER_GRAD_OTHERS',
+        'FIRST_JOB_FACTORS',
+        'FIRST_JOB_FACTORS_OTHERS',
+        'CHALLENGES',
+        'CHALLENGES_OTHERS',
+        'AWARDS',
+        'LEVEL_AWARD',
+        'LEVEL_AWARD_OTHERS',
+        'AWARD_DOC',
+        'AWARD_DOC_FILE',
+    );
+
     public function __construct() 
     {
         Parent::__construct();
@@ -289,6 +323,39 @@ class SQL_Tracer extends DB_Connect {
 
     public function saveAlumniProfile3($alumni_key)
     {
+        //print "<pre>"; print_r($_POST); print_r($_FILES); exit;
+
+        # Supporting Document
+        if (isset($_FILES['SUPPORTING_DOC_FILE']) && isset($_FILES['SUPPORTING_DOC_FILE']['tmp_name'])) {
+            $doc = $_FILES['SUPPORTING_DOC_FILE']['tmp_name'];
+            //print "<pre>$profile_pic\n";
+            if (is_file($doc)) {
+                $dir = $this->getAlumniDataFolder();
+                if (is_dir($dir)) {
+                    $ext = getFileExtension($_FILES['SUPPORTING_DOC_FILE']['name']);
+                    $new_file = "{$dir}/supporting_document.{$ext}";
+                    //print "<pre>$new_file\n";
+                    copy($doc, $new_file);
+                    $_POST['profile_updates']['success']['SUPPORTING_DOC_FILE'] = 'Supporting document for employment has been uploaded';
+                }
+            }
+        }
+
+        # Award Document
+        if (isset($_FILES['AWARD_DOC_FILE']) && isset($_FILES['AWARD_DOC_FILE']['tmp_name'])) {
+            $doc = $_FILES['AWARD_DOC_FILE']['tmp_name'];
+            //print "<pre>$profile_pic\n";
+            if (is_file($doc)) {
+                $dir = $this->getAlumniDataFolder();
+                if (is_dir($dir)) {
+                    $ext = getFileExtension($_FILES['AWARD_DOC_FILE']['name']);
+                    $new_file = "{$dir}/award_document.{$ext}";
+                    //print "<pre>$new_file\n";
+                    copy($doc, $new_file);
+                    $_POST['profile_updates']['success']['AWARD_DOC_FILE'] = 'Award document has been uploaded';
+                }
+            }
+        }
         $this->updateAlumniProfileInDB($alumni_key, 3);
     }
 
@@ -338,8 +405,34 @@ class SQL_Tracer extends DB_Connect {
                 }
             }
             $data['Profile2'] = json_encode($profile);
+        } elseif ($profile_page == 3) {
+            $profile = $existing ? json_decode($data['Profile3'], true) : array();    
+            foreach ($this->profile3_fields as $field) {
+                if (isset($_POST[$field]) && $_POST[$field] !== '') {
+                    $profile[$field] = $_POST[$field];
+                }
+            }
+            $data['Profile3'] = json_encode($profile);
+            if (isset($_POST['EMPLOYMENT_STATUS'])) {
+                $data['Employment_Status'] = $_POST['EMPLOYMENT_STATUS'];
+            }
+            if (isset($_POST['NAME_COMPANY'])) {
+                $data['Company_Name'] = $_POST['NAME_COMPANY'];
+            }
+            if (isset($_POST['POSITION'])) {
+                $data['Position'] = $_POST['POSITION'];
+            }
+            if (isset($_POST['SUPPORTING_DOCUMENT'])) {
+                $data['Supporting_Doc'] = $_POST['SUPPORTING_DOCUMENT'];
+            }
+            if (isset($_POST['LEVEL_AWARD'])) {
+                $data['Awards_Received'] = ($_POST['LEVEL_AWARD'] == 'others') ? $_POST['LEVEL_AWARD'] : $_POST['LEVEL_AWARD_OTHERS'];
+            }
+            if (isset($_POST['FIRST_JOB_AFTER_GRAD'])) {
+                $data['Hired_2Years_After_Grad'] = ($_POST['FIRST_JOB_AFTER_GRAD'] == 'others') ? 0 : 1;
+            }
         }        
-        //print "<pre>"; print_r($_POST); exit;   
+        //print "<pre>"; print_r($data); exit;   
 
         if ($existing) {
             $where_sql = " Alumni_Key = {$alumni_key} ";

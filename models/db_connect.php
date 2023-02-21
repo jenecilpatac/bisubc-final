@@ -48,7 +48,7 @@ class DB_Connect {
                 $values[$col] = "{$col}='{$data[$col]}'";
             }
         }
-        //print "<pre>"; print_r($data); print_r($values); exit;
+        //print "<pre>"; print_r($data); print_r($values); var_dump($where_sql); exit;
 
         $success = false;
         if (!empty($values) && $where_sql !== '') {
