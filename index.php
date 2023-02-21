@@ -50,11 +50,6 @@ if ($_GET['m'] == 'login') {
         require_once 'views/ui_login.php';
         exit;
 
-    } elseif (!empty($_SESSION['ais']['logged'])) {
-        //print "<pre>ELSEIF "; print_r($_SESSION); exit;
-        header("Location: ./index.php");
-        exit;
-
     } else {
         //print "<pre>ELSE "; print_r($_SESSION); exit;
         $_SESSION['ais']['logged'] = array();
@@ -109,21 +104,23 @@ if ($_GET['m'] == 'login') {
 # Login
 if (!isset($_SESSION['ais']['logged']) || empty($_SESSION['ais']['logged'])) {
     //print "<pre>"; print_r($_SESSION); exit;
-    header("Location: ./index.php?m=login&type=admin");
+    //header("Location: ./index.php?m=login&type=admin");
 }
 
 $_POST['alert_data'] = array();
-if (isset($_SESSION['ais']['logged'])) {
+if (isset($_SESSION['ais']['logged']) && !empty($_SESSION['ais']['logged'])) {
     if ($_SESSION['ais']['logged'] == ADMIN_USERNAME) {
         $_POST['alert_data']['unread'] = 0;
         $_POST['alert_data']['alerts'] = array();
-    } else {
+    } elseif ($_SESSION['ais']['logged'] != 'guest') {
         $alumni_key = intval($_SESSION['ais']['logged']['Alumni_Key']);
         $_POST['alert_data']['unread'] = $sql->getUnreadAlumniAlertCount($alumni_key);
         $_POST['alert_data']['alerts'] = $sql->getAlumniAlerts($alumni_key);
     }
     //print "<pre>"; print_r($_POST['alert_data']); exit;
-} 
+} else {
+    $_SESSION['ais']['logged'] = 'guest';
+}
 
 # Logout
 if ($_GET['m'] == 'logout') {

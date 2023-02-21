@@ -3,7 +3,7 @@
 function logout()
 {
     unset($_SESSION['ais']['logged']);
-    header('Location: index.php?m=login');
+    header('Location: index.php');
     exit;
 }
 

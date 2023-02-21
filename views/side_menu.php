@@ -34,99 +34,100 @@
                 <span>Announcements</span></a>
             </li>
 
-            
-            <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>                   
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item
-                    <?php if (isset($_GET['m']) && $_GET['m'] == 'tracer'): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-folder  text-white"></i>
-                        <span>Alumni Tracer</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Grduate Tracer Survey:</h6>
-                            <a class="collapse-item" href="index.php?m=tracer&profile=1">Profile 1</a>
-                            <a class="collapse-item" href="index.php?m=tracer&profile=2">Profile 2</a>
-                            <a class="collapse-item" href="index.php?m=tracer&profile=3">Profile 3</a>
+            <?php if ($_SESSION['ais']['logged'] != 'guest'): ?>    
+                <?php if (is_array($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['First_Name'])): ?>                   
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item
+                        <?php if (isset($_GET['m']) && $_GET['m'] == 'tracer'): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-folder  text-white"></i>
+                            <span>Alumni Tracer</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Grduate Tracer Survey:</h6>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=1">Profile 1</a>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=2">Profile 2</a>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=3">Profile 3</a>
+                            </div>
                         </div>
-                    </div>
-                </li>
+                    </li>
 
-            <?php else: ?>    
-                <!-- Nav Item - Dashboard -->
-                <!--
-                <li class="nav-item 
-                    <?php if (isset($_GET['m']) && $_GET['m'] == 'dashboard'): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link" href="index.php?m=dashboard">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-                </li>
-                -->
+                <?php else: ?>    
+                    <!-- Nav Item - Dashboard -->
+                    <!--
+                    <li class="nav-item 
+                        <?php if (isset($_GET['m']) && $_GET['m'] == 'dashboard'): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link" href="index.php?m=dashboard">
+                        <i class="fas fa-fw fa-tachometer-alt"></i>
+                        <span>Dashboard</span></a>
+                    </li>
+                    -->
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
-                <!-- Nav Item - Pages Collapse Menu -->
-                <li class="nav-item
-                    <?php if (isset($_GET['report']) && $_GET['report'] == 1): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                        aria-expanded="true" aria-controls="collapseTwo">
-                        <i class="fas fa-fw fa-folder  text-white"></i>
-                        <span>Reports</span>
-                    </a>
-                    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                        <div class="bg-white py-2 collapse-inner rounded">
-                            <h6 class="collapse-header">Alumni Reports:</h6>
-                            <a class="collapse-item" href="index.php?m=registered_alumni&report=1">Registered Alumni</a>
-                            <a class="collapse-item" href="index.php?m=outcome_indicator&report=1">Outcome Indicator</a>
-                            <a class="collapse-item" href="index.php?m=employed_graduates&report=1">Employed Graduates</a>
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+                    <!-- Nav Item - Pages Collapse Menu -->
+                    <li class="nav-item
+                        <?php if (isset($_GET['report']) && $_GET['report'] == 1): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                            aria-expanded="true" aria-controls="collapseTwo">
+                            <i class="fas fa-fw fa-folder  text-white"></i>
+                            <span>Reports</span>
+                        </a>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                            <div class="bg-white py-2 collapse-inner rounded">
+                                <h6 class="collapse-header">Alumni Reports:</h6>
+                                <a class="collapse-item" href="index.php?m=registered_alumni&report=1">Registered Alumni</a>
+                                <a class="collapse-item" href="index.php?m=outcome_indicator&report=1">Outcome Indicator</a>
+                                <a class="collapse-item" href="index.php?m=employed_graduates&report=1">Employed Graduates</a>
+                            </div>
                         </div>
+                    </li>
+
+                    <!-- Divider -->
+                    <hr class="sidebar-divider">
+
+                    <!-- Heading -->
+                    <div class="sidebar-heading">
+                        Manage Data
                     </div>
-                </li>
 
-                <!-- Divider -->
-                <hr class="sidebar-divider">
+                    <!-- Nav Item - Courses -->
+                    <li class="nav-item
+                        <?php if (isset($_GET['m']) && $_GET['m'] == 'manage_courses'): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link" href="index.php?m=manage_courses">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Courses</span>
+                        </a>
+                    </li>
 
-                <!-- Heading -->
-                <div class="sidebar-heading">
-                    Manage Data
-                </div>
-
-                <!-- Nav Item - Courses -->
-                <li class="nav-item
-                    <?php if (isset($_GET['m']) && $_GET['m'] == 'manage_courses'): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link" href="index.php?m=manage_courses">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Courses</span>
-                    </a>
-                </li>
-
-                <!-- Nav Item - Alumni -->
-                <li class="nav-item
-                    <?php if (isset($_GET['m']) && $_GET['m'] == 'manage_alumni'): ?>
-                        active
-                    <?php endif; ?>
-                ">
-                    <a class="nav-link" href="index.php?m=manage_alumni">
-                        <i class="fas fa-fw fa-cog"></i>
-                        <span>Alumni</span></a>
-                </li>   
-                
+                    <!-- Nav Item - Alumni -->
+                    <li class="nav-item
+                        <?php if (isset($_GET['m']) && $_GET['m'] == 'manage_alumni'): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link" href="index.php?m=manage_alumni">
+                            <i class="fas fa-fw fa-cog"></i>
+                            <span>Alumni</span></a>
+                    </li>   
+                    
+                <?php endif; ?>
             <?php endif; ?>
 
             <!-- Divider -->
