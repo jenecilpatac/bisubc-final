@@ -84,15 +84,23 @@ CREATE TABLE admin_alerts (
 -- --------------------------------------------------------
 
 --
--- Table structure for table alumni_alerts
+-- Table structure for table alumni_profiles
 --
-CREATE TABLE alumni_alerts (
-  Alumni_Alert_Key int(10) unsigned NOT NULL auto_increment,
-  Alumni_Key int(10) unsigned,
-  Annoucement_Key int(10) unsigned,
-  Is_Read int(1) NOT NULL,
-  PRIMARY KEY  (Alumni_Alert_Key),
-  UNIQUE KEY tbl_unique (Alumni_Key, Annoucement_Key)
+CREATE TABLE alumni_profiles (
+  Alumni_Profile_Key int(10) unsigned NOT NULL auto_increment,
+  Alumni_Key int(10) unsigned,  
+  Profile1 longtext NOT NULL,
+  Profile2 longtext NOT NULL,
+  Profile3 longtext NOT NULL,
+  Employment_Status varchar(30) NOT NULL DEFAULT '',
+  Company_Name varchar(255) NOT NULL DEFAULT '',
+  Supporting_Doc varchar(255) NOT NULL DEFAULT '',
+  Position varchar(100) NOT NULL DEFAULT '',
+  Awards_Received varchar(255) NOT NULL DEFAULT '',
+  Hired_2Years_After_Grad int(1) NOT NULL DEFAULT 0,
+  Date_Updated int(10) NOT NULL,
+  PRIMARY KEY  (Alumni_Profile_Key),
+  UNIQUE KEY tbl_unique (Alumni_Key)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
 -- --------------------------------------------------------
 

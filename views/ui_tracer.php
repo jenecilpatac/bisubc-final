@@ -6,6 +6,7 @@
 
 <!-- Begin Page Content -->
 <div class="container-fluid">
+    <?php require_once 'views/tpl_alert_msg.php' ?>
     <?php if (isset($_GET['profile']) && $_GET['profile'] == 2): ?>
         <?php require_once 'views/tpl_profile2.php' ?>
 

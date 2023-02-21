@@ -614,6 +614,24 @@ class SQL_Alumni extends DB_Connect {
         return $success;
     }
 
+    public function updateUserPassword($password, $user_key)
+    {
+        $sql = "
+            UPDATE users
+            SET Pass_Word = '$password'
+            WHERE User_Key = $user_key
+        ";
+        //print "<pre>$sql\n";
+        if ($this->db->query($sql) === true) {
+            $success = true;
+        } else {
+            $success = $this->db->error;
+        }
+        //var_dump($success);
+
+        return $success;
+    }
+
     public function updateAlumniProfile($data, $user_key)
     {
         //print "<pre> $user_key\n"; print_r($data); print_r($fields); exit;

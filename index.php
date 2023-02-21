@@ -92,11 +92,42 @@ if ($_GET['m'] == 'login') {
     die();
 
     # Registered Alumni
-} elseif ($_GET['m'] == 'tracker') {    
-    print "<pre>"; print_r($_SESSION['ais']); exit;
+} elseif ($_GET['m'] == 'tracer') {    
+    //print "<pre>"; print_r($_SESSION['ais']); exit;
+    $alumni_key = $_SESSION['ais']['logged']['Alumni_Key'];
+    if (isset($_POST['save_profile'])) {
+        $_POST['profile_updates'] = array(
+            'error' => array(),
+            'success' => array(),
+        );
+        $_POST['save_profile'] = intval($_POST['save_profile']);
+        if ($_POST['save_profile'] == 1) {
+            $sql_tracer->saveAlumniProfile1($alumni_key);
+        } elseif ($_POST['save_profile'] == 2) {  
+            $sql_tracer->saveAlumniProfile2($alumni_key);
+        } elseif ($_POST['save_profile'] == 3) {  
+            $sql_tracer->saveAlumniProfile3($alumni_key);
+        }
+        //print "<pre>"; print_r($_SESSION['ais']); print_r($_POST); ;print_r($_FILES); exit;        
+        $sql_tracer->checkSaveResults();
+    } elseif (isset($_POST['to_profile'])) {
+        $profile_sel = intval($_POST['to_profile']);
+        header("Location: index.php?m=tracer&profile=".$profile_sel);
+
+    }
+    $_POST['disabled'] = array(
+        'FIRST_NAME' => true,
+        'MIDDLE_NAME' => true,
+        'LAST_NAME' => true,
+        'LAST_NAME' => true,
+        'COURSE_NAME' => true,
+        'BATCH' => true,
+    );    
+    $sql_tracer->setAlumniProfileSessionData($alumni_key);     
+    //print "<pre>"; print_r($_SESSION['ais']['profile']); exit;
     $_POST['courses'] = $sql->getCourseList();
-    $_POST['batches'] = array();
-    require_once 'views/ui_tracker.php';
+    $_POST['batches'] = $sql->getBatches();
+    require_once 'views/ui_tracer.php';
     die();
 }
 //print "<pre>"; print_r($_GET); exit;

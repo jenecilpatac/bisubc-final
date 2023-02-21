@@ -28,43 +28,45 @@ class DB_Connect {
         if (!empty($values)) {
             # Only insert table data when has values
             $sql = "INSERT INTO {$table} (".implode(',', $fields).") ".implode(', ', $values);
-            //print "<pre> $sql\n";
+            print "<pre> $sql\n";
             if ($this->db->query($sql) === true) {
                 $success = true;
             } else {
                 $success = $this->db->error;
             }
+            var_dump($success);
         }
 
         return $success;
     }
 
-    public function updateTableRow($table, $fields, $data, $where, $and=array())
+    public function updateTableRow($table, $fields, $data, $where_sql, $and_sql='')
     {
         $values = array();
-        foreach ($data as $col => $val) {
-            if (isset($fields[$col])) {
-                if (!is_numeric($val)) {
-                    $values[$col] = "{$col}='{$val}'";
-                } else {
-                    $values[$col] = "{$col}={$val}";
-                }
+        foreach ($fields as $col) {
+            if (isset($data[$col])) {
+                $values[$col] = "{$col}='{$data[$col]}'";
             }
         }
+        //print "<pre>"; print_r($data); print_r($values); exit;
 
-        if (!empty($values) && !empty($where)) {
+        $success = false;
+        if (!empty($values) && $where_sql !== '') {
             # Only insert table data when has values
             $sql = "UPDATE {$table} 
                     SET ".implode(',', $values)." 
                     WHERE {$where_sql}
-                        {$and_sql}
             ";
+            if ($and_sql !== '') {
+                $sql .= " {$and_sql}";
+            }
             //print "<pre> $sql\n";
             if ($this->db->query($sql) === true) {
                 $success = true;
             } else {
                 $success = $this->db->error;
             }
+            //var_dump($success);
         }
 
         return $success;

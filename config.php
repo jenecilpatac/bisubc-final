@@ -8,6 +8,7 @@
     define("DB_PASS", "B!su");
     //define("DB_USER", "root");
     //define("DB_PASS", "");
+    define("ALUMNI_DATA", './ALUMNI_DATA');
 
     $_DEPARTMENTS = array(
         'ICT' => 'Information & Communications Technology Department',

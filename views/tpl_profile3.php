@@ -379,36 +379,37 @@
                         <nav aria-label="...">
                             <ul class="pagination">
                                 <li class="page-item m-1">
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="2">
                                         << Previous 
                                     </button>
                                 </li>
                                 <li class="page-item m-1">                                                
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile1">
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="1">
                                         Profile 1
                                     </button>
                                 </li>
                                 <li class="page-item m-1">                                                
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="2">
                                         Profile 2 
                                     </button>
                                 </li>
                                 <li class="page-item m-1">                                                
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile3" disabled>
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="3" disabled>
                                         Profile 3 
                                     </button>
                                 </li>
                                 <li class="page-item m-1">                                                
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile3" disabled>
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="3" disabled>
                                         Next >> 
                                     </button>
                                 </li>
                                 <li class="page-item m-1 pl-3">                                                
-                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save" value="profile2">
+                                    <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="save_profile" value="3" >
                                         Save Changes
                                     </button>
                                 </li>
                             </ul>
+                            <input type="hidden" name="from_profile" value="profile3" />
                         </nav>
                     </div>                        
                 </div>                            
