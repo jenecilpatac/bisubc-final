@@ -178,10 +178,25 @@ if ($_GET['m'] == 'logout') {
     
 # Registered Alumni
 } elseif ($_GET['m'] == 'registered_alumni') {
-    $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData();
-    //print "<pre>"; print_r($_POST['table']); exit;
     $_POST['courses'] = $sql->getCourseList();
-    $_POST['batches'] = $sql->getBatches();
+    $_POST['batches'] = $sql->getBatches();    
+    if (isset($_POST['view']) && $_POST['view'] == 'alumni') {
+        //print "<pre>"; print_r($_POST); exit;
+        $_POST['course_sel'] = $_POST['course'];
+        $_POST['batch_sel'] = $_POST['batch'];
+    } elseif (!isset($_POST['course_sel']) && !isset($_POST['batch_sel'])) {
+        $batches = array_keys($_POST['batches']);
+        if (!empty($batches)) {
+            $_POST['batch_sel'] = $batches[0];
+            $batch = $_POST['batches'][$_POST['batch_sel']];
+            $_POST['course_sel'] = $batch['Course_Code'];
+        } else {
+            $_POST['batch_sel'] = '-';
+            $_POST['course_sel'] = '-';
+        }
+    }
+    $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData($_POST['batch_sel'], $_POST['course_sel']);
+    //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_registered_alumni.php';
 
 # Employed Graduates

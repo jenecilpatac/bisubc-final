@@ -98,6 +98,41 @@ INSERT INTO `alumni_alerts` VALUES (1,15,1,0),(2,14,1,0),(3,15,2,0),(4,14,2,0),(
 UNLOCK TABLES;
 
 --
+-- Table structure for table `alumni_profiles`
+--
+
+DROP TABLE IF EXISTS `alumni_profiles`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `alumni_profiles` (
+  `Alumni_Profile_Key` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `Alumni_Key` int(10) unsigned DEFAULT NULL,
+  `Profile1` longtext NOT NULL,
+  `Profile2` longtext NOT NULL,
+  `Profile3` longtext NOT NULL,
+  `Employment_Status` varchar(30) NOT NULL DEFAULT '',
+  `Company_Name` varchar(255) NOT NULL DEFAULT '',
+  `Supporting_Doc` varchar(255) NOT NULL DEFAULT '',
+  `Position` varchar(100) NOT NULL DEFAULT '',
+  `Awards_Received` varchar(255) NOT NULL DEFAULT '',
+  `Hired_2Years_After_Grad` int(1) NOT NULL DEFAULT '0',
+  `Date_Updated` int(10) NOT NULL,
+  PRIMARY KEY (`Alumni_Profile_Key`),
+  UNIQUE KEY `tbl_unique` (`Alumni_Key`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `alumni_profiles`
+--
+
+LOCK TABLES `alumni_profiles` WRITE;
+/*!40000 ALTER TABLE `alumni_profiles` DISABLE KEYS */;
+INSERT INTO `alumni_profiles` VALUES (1,15,'{\"FIRST_NAME\":\"LEA JOY\",\"MIDDLE_NAME\":\"Middle Name\",\"LAST_NAME\":\"KARAAN\",\"PERMANENT_ADDRESS\":\"Address\",\"EMAIL\":\"leajoy.karaan@gmail.com\",\"PHONE\":\"411-123456\",\"MOBILE\":\"1234567890\",\"CIVIL_STATUS\":\"1\",\"SEX\":\"1\",\"BIRTHDAY\":\"2000-02-04\",\"ANNUAL_INCOME\":\"Php 1,000,000\"}','{\"EXAM_PASSED\":[\"Licensure Examination for Teacher\",\"Exam Name 1\",\"Exam Name 2\",\"\"],\"EXAM_DATE_TAKEN\":[\"May 2020\",\"Exam Date 1\",\"Exam Date 2\",\"\"],\"EXAM_RATING\":[\"80.5\",\"Rating 1\",\"Rating 2\",\"\"],\"ADVANCE_STUDY_PASSED\":[\"Masters 1\",\"Masters 2\",\"Masters 3\",\"\"],\"ADVANCE_STUDY_DURATION\":[\"Masters Date 1\",\"Masters Date 2\",\"Masters Date 3\",\"\"],\"ADVANCE_STUDY_PLACE\":[\"University 1\",\"University 2\",\"University 3\",\"\"],\"PURSUE_ADVANCE_STUDIES\":\"others\",\"PURSUE_ADVANCE_STUDIES_OTHERS\":\" testing\"}','{\"EMPLOYMENT_STATUS\":\"employed\",\"JOB_EXPERIENCES\":\"single_multiple\",\"NEVER_EMPLOYED\":\"others\",\"NEVER_EMPLOYED_OTHERS\":\"sdafsadf\",\"LOCAL_ABROAD\":\"abroad\",\"NAME_COMPANY\":\"dsfsaf\",\"ADDRESS_COMPANY\":\"dsafsdf\",\"CONTACT_COMPANY\":\"dsfsdaf\",\"LINE_BUSINESS\":\"dsafsf\",\"POSITION\":\"sdfsadf\",\"WORK_ALIGNED\":\"yes\",\"STATUS_FIRST_JOB\":\"regular_permanent\",\"STATUS_CURRENT_JOB\":\"casual\",\"LEVEL_FIRST_JOB\":\"self_employed\",\"SELF_EMPLOYED_LINE\":\"sdfsadf\",\"FIND_FIRST\":\"others\",\"FIND_FIRST_OTHERS\":\"sdafsdaf\",\"FIRST_JOB_AFTER_GRAD\":\"others\",\"FIRST_JOB_AFTER_GRAD_OTHERS\":\"sdfsadfs\",\"FIRST_JOB_FACTORS\":\"others\",\"FIRST_JOB_FACTORS_OTHERS\":\"sdfsadfs\",\"CHALLENGES\":\"others\",\"CHALLENGES_OTHERS\":\"sdfsadfs\",\"AWARDS\":\"yes\",\"LEVEL_AWARD\":\"others\",\"LEVEL_AWARD_OTHERS\":\"sdafsdf\",\"SUPPORTING_DOCUMENT\":\"company id\",\"AWARD_DOC\":\"Cretificate\"}','employed','dsfsaf','company id','sdfsadf','others',0,1677015689);
+/*!40000 ALTER TABLE `alumni_profiles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `announcements`
 --
 
@@ -203,7 +238,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,15,'leajoy.karaan@gmail.com','752c476b8c86a6176e3482ca9b206f80',1676546903),(2,14,'cherrymae.garsuta@gmail.com','752c476b8c86a6176e3482ca9b206f80',1676546987);
+INSERT INTO `users` VALUES (1,15,'leajoy.karaan@gmail.com','190f59a61c072f4877cf35e32d3f5fe9',1676546903),(2,14,'cherrymae.garsuta@gmail.com','752c476b8c86a6176e3482ca9b206f80',1676546987);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -216,4 +251,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-02-17  5:24:14
+-- Dump completed on 2023-02-22  5:45:11

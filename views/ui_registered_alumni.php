@@ -16,7 +16,7 @@
     <div class="container-fluid mb-4">
         <!-- Outer Row -->
         <div class="row justify-content-center">
-            <form action="index.php?m=manage_alumni" method="POST" enctype="multipart/form-data">
+            <form action="index.php?m=registered_alumni&report=1" method="POST" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-6">
                         <div class="form-floating">

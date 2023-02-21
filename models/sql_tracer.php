@@ -72,34 +72,31 @@ class SQL_Tracer extends DB_Connect {
 
     }
 
-    public function getRegisteredAlumniList()
+    public function getRegisteredAlumniList($batch, $course_code)
     {
         $sql = "
             SELECT *, 
                 concat(First_Name, ' ', Last_Name) as Name
             FROM users as t1
-            LEFT JOIN alumni as t2 ON t1.Alumni_Key = t2.Alumni_Key
+            LEFT JOIN alumni as t2 
+                ON t1.Alumni_Key = t2.Alumni_Key
+            LEFT JOIN batches as t4 
+                ON t2.Batch_Key = t4.Batch_Key
+            LEFT JOIN courses as t5 
+                ON t4.Course_Key = t5.Course_Key
+            LEFT JOIN alumni_profiles as t3 
+                ON t1.Alumni_Key = t3.Alumni_Key
+            WHERE Batch = '{$batch}'
+                AND Course_Code = '{$course_code}'
             ORDER BY Last_Name, First_Name
         ";
         $results = $this->getDataFromTable($sql);
         //print "<pre>$sql"; print_r($results); exit;
-        $results = array();
-        for ($i=0; $i< 20; $i++) {
-            $results[] = array(
-                'Name' => 'Name',
-                'Address' => 'Address',
-                'Email' => 'Email',
-                'Employment_Status' => 'Status',
-                'Company_Name' => 'Name of Company',
-                'Position' => 'Position',
-                'Awards_Received' => 'Awards Received',
-            );
-        }
 
         return $results;
     }
 
-    public function getRegisteredAlumniTableData()
+    public function getRegisteredAlumniTableData($batch, $course_code)
     {
         $table = array();
         $table['table_id'] = 'dataTable'; // 'registered_alumni_tbl';
@@ -111,10 +108,8 @@ class SQL_Tracer extends DB_Connect {
             'Company_Name' => 'Name of Company',
             'Position' => 'Position',
             'Awards_Received' => 'Awards Received',
-        );
-
-        
-        $table['table_data'] = $this->getRegisteredAlumniList();
+        );       
+        $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);
 
         return $table;
     }
@@ -426,7 +421,7 @@ class SQL_Tracer extends DB_Connect {
                 $data['Supporting_Doc'] = $_POST['SUPPORTING_DOCUMENT'];
             }
             if (isset($_POST['LEVEL_AWARD'])) {
-                $data['Awards_Received'] = ($_POST['LEVEL_AWARD'] == 'others') ? $_POST['LEVEL_AWARD'] : $_POST['LEVEL_AWARD_OTHERS'];
+                $data['Awards_Received'] = ($_POST['LEVEL_AWARD'] == 'others') ? $_POST['LEVEL_AWARD_OTHERS'] : $_POST['LEVEL_AWARD'];
             }
             if (isset($_POST['FIRST_JOB_AFTER_GRAD'])) {
                 $data['Hired_2Years_After_Grad'] = ($_POST['FIRST_JOB_AFTER_GRAD'] == 'others') ? 0 : 1;
