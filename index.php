@@ -58,7 +58,7 @@ if ($_GET['m'] == 'login') {
         exit;
     }
 
-# Registered Alumni
+# Register
 } elseif ($_GET['m'] == 'register') {
     $_POST['courses'] = $sql->getCourseList();
     $_POST['batches'] = $sql->getBatches();
@@ -208,15 +208,22 @@ if ($_GET['m'] == 'logout') {
     //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_registered_alumni.php';
 
-# Alumni Profile CV
-} elseif ($_GET['m'] == 'CV') {
-    $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData();
-    //print "<pre>"; print_r($_POST['table']); exit;
-    require_once 'views/ui_print_alumni_profile.php';
-
 # Employed Graduates
 } elseif ($_GET['m'] == 'employed_graduates') {
-    $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData();
+    $_POST['batches'] = $sql->getBatches();    
+    if (isset($_POST['view']) && $_POST['view'] == 'alumni') {
+        //print "<pre>"; print_r($_POST); exit;
+        $_POST['batch_sel'] = $_POST['batch'];
+    } elseif (!isset($_POST['batch_sel'])) {
+        $batches = array_keys($_POST['batches']);
+        if (!empty($batches)) {
+            $_POST['batch_sel'] = $batches[0];
+            $batch = $_POST['batches'][$_POST['batch_sel']];
+        } else {
+            $_POST['batch_sel'] = '-';
+        }
+    }
+    $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData($_POST['batch_sel']);
     //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_employed_graduates.php';
 
@@ -226,12 +233,25 @@ if ($_GET['m'] == 'logout') {
 
 # Outcome Indicator
 } elseif ($_GET['m'] == 'outcome_indicator') {
-    $_POST['details_table'] = $sql_tracer->getOutcomeIndicatorTableData();
-    $_POST['summary_table'] = $sql_tracer->getOutcomeIndicatorSummaryTableData();
-    //print "<pre>"; print_r($_POST['details_table']); exit;
-    //print "<pre>"; print_r($_POST['summary_table']); exit;
     $_POST['courses'] = $sql->getCourseList();
-    $_POST['batches'] = $sql->getBatches();
+    $_POST['batches'] = $sql->getBatches();    
+    if (isset($_POST['view']) && $_POST['view'] == 'alumni') {
+        //print "<pre>"; print_r($_POST); exit;
+        $_POST['course_sel'] = $_POST['course'];
+        $_POST['batch_sel'] = $_POST['batch'];
+    } elseif (!isset($_POST['course_sel']) && !isset($_POST['batch_sel'])) {
+        $batches = array_keys($_POST['batches']);
+        if (!empty($batches)) {
+            $_POST['batch_sel'] = $batches[0];
+            $batch = $_POST['batches'][$_POST['batch_sel']];
+            $_POST['course_sel'] = $batch['Course_Code'];
+        } else {
+            $_POST['batch_sel'] = '-';
+            $_POST['course_sel'] = '-';
+        }
+    }
+    $_POST['details_table'] = $sql_tracer->getOutcomeIndicatorTableData($_POST['batch_sel'], $_POST['course_sel']);
+    $_POST['summary_table'] = $sql_tracer->getOutcomeIndicatorSummaryTableData($_POST['batch_sel'], $_POST['course_sel']);
     require_once 'views/ui_outcome_indicator.php';
 
 # Tracer

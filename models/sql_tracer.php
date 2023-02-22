@@ -110,7 +110,7 @@ class SQL_Tracer extends DB_Connect {
             'Position' => 'Position',
             'Awards_Received' => 'Awards Received',
         );       
-        $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);        
+        $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);
         //print "<pre>"; print_r($table['table_data']); 
         foreach ($table['table_data'] as $i => $row) {
             $table['table_data'][$i]['Name'] = "<a target='_blank' href='index.php?m=tracer&alumni_key={$row['Alumni_Key']}'>{$row['Name']}</a>";
@@ -120,7 +120,30 @@ class SQL_Tracer extends DB_Connect {
         return $table;
     }
 
-    public function getEmployedGraduatesTableData()
+    public function getEmployedGraduatesData($batch)
+    {
+        $sql = "
+            SELECT 
+                count(*) as Alumni_Count,
+                Course_Name,
+                Course_Code,
+                Hired_2Years_After_Grad
+            FROM alumni as t2
+            LEFT JOIN batches as t4 
+                ON t2.Batch_Key = t4.Batch_Key
+            LEFT JOIN courses as t5 
+                ON t4.Course_Key = t5.Course_Key
+            LEFT JOIN alumni_profiles as t3 
+                ON t2.Alumni_Key = t3.Alumni_Key
+            WHERE Batch = '{$batch}'            
+            GROUP BY Course_Code, Hired_2Years_After_Grad
+        ";        
+        $results = $this->getDataFromTable($sql);
+
+        return $results;
+    }
+
+    public function getEmployedGraduatesTableData($batch)
     {
         $table = array();
         $table['table_id'] = 'dataTable'; // 'employed_graduates_tbl';
@@ -130,28 +153,94 @@ class SQL_Tracer extends DB_Connect {
             'Total_Graduates_Hired_2yrs' => 'No. of Graduates Hired<br>within 2 years after graduation',
             'Percentage' => 'Percentage',
         );
+        $data = $this->getEmployedGraduatesData($batch);
+        //if (isset($_POST['view']) && $_POST['view'] == 'alumni') {
+            //print "<pre>$batch\n"; print_r($data);  exit;
+        //}
+        $summary = array();
+        foreach ($data as $row) {
+            $course = $row['Course_Code'];
+            if (!isset($summary[$course])) {
+                $summary[$course] = array(
+                    'Course_Name' => $row['Course_Name'],
+                    'Total_Graduates' => 0,
+                    'Total_Graduates_Hired_2yrs' => 0,
+                );                
+            }
+            $summary[$course]['Total_Graduates'] += $row['Alumni_Count'];
+            if ($row['Hired_2Years_After_Grad'] == 1) {
+                $summary[$course]['Total_Graduates_Hired_2yrs'] += $row['Alumni_Count'];
+            } 
+        }
         $table['table_data'] = array();
+        foreach ($summary as $course => $row) {
+            $row['Percentage'] = round(($row['Total_Graduates_Hired_2yrs'] / $row['Total_Graduates'])*100, 4);
+            $table['table_data'][] = $row;
+        }
 
         return $table;
     }
 
-    public function getOutcomeIndicatorTableData()
+    public function getOutcomeIndicatorData($batch, $course_code)
+    {
+        $sql = "
+            SELECT *, 
+                t2.Alumni_Key,
+                concat(First_Name, ' ', Last_Name) as Name
+            FROM alumni as t2
+            LEFT JOIN batches as t4 
+                ON t2.Batch_Key = t4.Batch_Key
+            LEFT JOIN courses as t5 
+                ON t4.Course_Key = t5.Course_Key
+            LEFT JOIN alumni_profiles as t3 
+                ON t2.Alumni_Key = t3.Alumni_Key
+            WHERE Batch = '{$batch}'
+                AND Course_Code = '{$course_code}'
+            ORDER BY Last_Name, First_Name
+        ";        
+        $results = $this->getDataFromTable($sql);
+
+        return $results;
+    }
+
+    public function getOutcomeIndicatorTableData($batch, $course_code)
     {
         $table = array();
         $table['table_id'] = 'dataTable'; // 'outcome_indicator_tbl';
         $table['table_headers'] = array(
-            'Course_Name' => 'Program',
             'Name' => 'Name of Graduates',
             'Employment_Status' => 'Status',
             'Company_Name' => 'Company Name / Type of Business',
-            'Supporting_Docs' => 'Supporting Documents',
+            'Supporting_Doc' => 'Supporting Documents',
         );
-        $table['table_data'] = array();
+        $table['table_data'] = $this->getOutcomeIndicatorData($batch, $course_code);
 
         return $table;
     }
 
-    public function getOutcomeIndicatorSummaryTableData()
+    public function getOutcomeIndicatorSummaryData($batch, $course_code)
+    {
+        $sql = "
+            SELECT 
+                count(*) as Alumni_Count,
+                Employment_Status
+            FROM alumni as t2
+            LEFT JOIN batches as t4 
+                ON t2.Batch_Key = t4.Batch_Key
+            LEFT JOIN courses as t5 
+                ON t4.Course_Key = t5.Course_Key
+            LEFT JOIN alumni_profiles as t3 
+                ON t2.Alumni_Key = t3.Alumni_Key
+            WHERE Batch = '{$batch}'
+                AND Course_Code = '{$course_code}'
+            GROUP BY Employment_Status
+        ";        
+        $results = $this->getDataFromTable($sql);
+
+        return $results;
+    }
+
+    public function getOutcomeIndicatorSummaryTableData($batch, $course_code)
     {
         $table = array();
         $table['table_id'] = 'dataTable'; // 'outcome_indicator_summary_tbl';
@@ -161,7 +250,27 @@ class SQL_Tracer extends DB_Connect {
             'Total_Unemployed' => 'Unemployed',
             'Total_Untracked' => 'Not Tracked',
         );
-        $table['table_data'] = array();
+        $summary = array(
+            'Total_Graduates' => 0,
+            'Total_Employed' => 0,
+            'Total_Unemployed' => 0,
+            'Total_Untracked' => 0,
+        );
+        $data = $this->getOutcomeIndicatorSummaryData($batch, $course_code);
+        //print "<pre>"; print_r($data);  exit;
+        foreach ($data as $row) {
+            $summary['Total_Graduates'] += $row['Alumni_Count'];
+            if ($row['Employment_Status'] == 'employed' || $row['Employment_Status'] == 'self_employed') {
+                $summary['Total_Employed'] += $row['Alumni_Count'];
+            } elseif ($row['Employment_Status'] == 'not_employed') {
+                $summary['Total_Unemployed'] += $row['Alumni_Count'];
+            } else {
+                $summary['Total_Untracked'] += $row['Alumni_Count'];
+            }
+        }
+        $table['table_data'] = array($summary);
+        //print "<pre>"; print_r($table['table_data']); exit;
+        
 
         return $table;
     }
