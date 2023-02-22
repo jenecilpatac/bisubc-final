@@ -10,7 +10,12 @@
 
         <!-- Topbar Navbar -->
         <ul class="navbar-nav ml-auto">        
-            <?php require_once 'views/tpl_alerts.php' ?>
+            <?php if ($_SESSION['ais']['logged'] == 'admin'): ?>
+                <?php require_once 'views/tpl_admin_alerts.php' ?>
+            <?php else: ?>
+                <?php require_once 'views/tpl_alerts.php' ?>
+            <?php endif; ?>
+
             <?php require_once 'views/tpl_user_info.php' ?>
         </ul>
 

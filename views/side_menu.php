@@ -33,6 +33,7 @@
                 <i class="fa fa-bullhorn"></i>
                 <span>Announcements</span></a>
             </li>
+    
 
             <?php if (($_SESSION['ais']['logged'] != 'guest'))  : ?>    
                 <?php if ((is_array($_SESSION['ais']['logged']) && (isset($_SESSION['ais']['logged']['First_Name']))  || ($_SESSION['ais']['logged'] == 'admin' && intval($_GET['alumni_key']) > 0)) ): ?>                   
@@ -60,7 +61,18 @@
                     </li>
                 <?php endif; ?> 
 
-                <?php if ($_SESSION['ais']['logged'] == 'admin'): ?>     
+                <?php if ($_SESSION['ais']['logged'] == 'admin'): ?>  
+                    <!-- Nav Item - Alerts -->
+                    <li class="nav-item
+                        <?php if (isset($_GET['m']) && $_GET['m'] == 'admin_alerts'): ?>
+                            active
+                        <?php endif; ?>
+                    ">
+                        <a class="nav-link" href="index.php?m=admin_alerts">
+                        <i class="fa fa-bullhorn"></i>
+                        <span>Notifications</span></a>
+                    </li>
+
                     <!-- Divider -->
                     <hr class="sidebar-divider">
                     <!-- Nav Item - Pages Collapse Menu -->

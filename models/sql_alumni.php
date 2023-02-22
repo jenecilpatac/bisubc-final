@@ -43,13 +43,12 @@ class SQL_Alumni extends DB_Connect {
 
     }
 
-    public function getUnreadAlumniAlertCount($alumni_key) 
+    public function getUnreadAdminAlertCount()
     {
         $sql = "
             SELECT count(*) Cnt
-            FROM alumni_alerts as t1
-            WHERE t1.Alumni_Key = $alumni_key        
-                AND Is_Read = 0
+            FROM admin_alerts 
+            WHERE Is_Read = 0
         ";
         $results = $this->getDataFromTable($sql);
         $count = 0;
@@ -60,6 +59,89 @@ class SQL_Alumni extends DB_Connect {
         return $count;
     }
 
+    public function getUnreadAlumniAlertCount($alumni_key) 
+    {
+        $sql = "
+            SELECT count(*) Cnt
+            FROM alumni_alerts as t1
+            WHERE t1.Alumni_Key = $alumni_key        
+                AND Is_Read = 0
+        ";
+        //print "<pre> $sql\n";
+        $results = $this->getDataFromTable($sql);
+        $count = 0;
+        foreach ($results as $row) {
+            $count = $row['Cnt'];
+        }
+        //print_r($results); exit;
+
+        return $count;
+    }
+
+    public function readAllAdminAlerts()
+    {
+        $sql = "UPDATE admin_alerts SET Is_Read = 1";
+        //print "<pre> $sql\n";
+        if ($this->db->query($sql) === true) {
+            $success = true;
+        } else {
+            $success = $this->db->error;
+        }
+        //var_dump($success); exit;
+
+        return $success;
+    }
+
+    public function readAllAlumniAlerts($alumni_key)
+    {
+        $sql = "UPDATE alumni_alerts SET Is_Read = 1 WHERE Alumni_Key = $alumni_key";
+        //print "<pre> $sql\n";
+        if ($this->db->query($sql) === true) {
+            $success = true;
+        } else {
+            $success = $this->db->error;
+        }
+
+        return $success;
+    }
+    
+    public function getAdminAlerts($limit='all') 
+    {
+        $sql = "
+            SELECT *,                
+                Date_Format(FROM_UNIXTIME(Alert_Time), '%M %e, %Y %H:%m') as Date
+            FROM admin_alerts
+            ORDER BY Alert_Time DESC
+        ";
+        if ($limit != 'all' && $limit > 0) {
+            $sql .= "
+                LIMIT $limit
+            ";
+        }
+        $results = $this->getDataFromTable($sql);
+
+        return $results;
+    }
+
+    public function addAdminAlerts($alert)
+    {
+        $res = false;
+        if ($alert != '') {
+            $table = 'admin_alerts'; 
+            $row = array(
+                'Alert' => $alert,
+                'Is_Read' => 0,
+                'Alert_Time' => time(),
+                'Alert_Code' => md5($alert)
+            );  
+            //print "<pre>"; print_r($row);
+            $res = $this->insertTableRow($table, array_keys($row), array($row));
+
+        }
+
+        return $res;
+    }
+
     public function getAlumniAlerts($alumni_key) 
     {
         $sql = "
@@ -68,7 +150,7 @@ class SQL_Alumni extends DB_Connect {
             FROM alumni_alerts as t1
             LEFT JOIN announcements as t2 ON t1.Annoucement_Key = t2.Annoucement_Key    
             WHERE t1.Alumni_Key = $alumni_key      
-            ORDER BY Is_Read DESC, Time_Stamp DESC
+            ORDER BY Time_Stamp DESC
             LIMIT 5
         ";
         $results = $this->getDataFromTable($sql);

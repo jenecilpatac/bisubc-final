@@ -147,11 +147,10 @@ if (!isset($_SESSION['ais']['logged']) || empty($_SESSION['ais']['logged'])) {
     //header("Location: ./index.php?m=login&type=admin");
 }
 
-$_POST['alert_data'] = array();
 if (isset($_SESSION['ais']['logged']) && !empty($_SESSION['ais']['logged'])) {
     if ($_SESSION['ais']['logged'] == ADMIN_USERNAME) {
-        $_POST['alert_data']['unread'] = 0;
-        $_POST['alert_data']['alerts'] = array();
+        $_POST['alert_data']['unread'] = $sql->getUnreadAdminAlertCount();
+        $_POST['alert_data']['alerts'] = $sql->getAdminAlerts(5);
     } elseif ($_SESSION['ais']['logged'] != 'guest') {
         $alumni_key = intval($_SESSION['ais']['logged']['Alumni_Key']);
         $_POST['alert_data']['unread'] = $sql->getUnreadAlumniAlertCount($alumni_key);
@@ -181,9 +180,24 @@ if ($_GET['m'] == 'logout') {
             }
         }
     }
+    if (isset($_SESSION['ais']['logged']) && isset($_SESSION['ais']['logged']['Alumni_Key'])) {
+        $alumni_key = intval($_SESSION['ais']['logged']['Alumni_Key']);
+        $sql->readAllAlumniAlerts($alumni_key);
+        $_POST['alert_data']['unread'] = $sql->getUnreadAlumniAlertCount($alumni_key);
+        $_POST['alert_data']['alerts'] = $sql->getAlumniAlerts($alumni_key);
+    }
     $_POST['announcement_list'] = $sql->getAnnouncementList();
     //print "<pre>"; print_r($_POST['announcement_list']); exit;
     require_once 'views/ui_announcements.php';
+
+# Notifications
+} elseif ($_GET['m'] == 'admin_alerts') {
+    $sql->readAllAdminAlerts();
+    $_POST['alert_data']['unread'] = $sql->getUnreadAdminAlertCount();
+    $_POST['alert_data']['alerts'] = $sql->getAdminAlerts(5);
+    $_POST['admin_alert_list'] = $sql->getAdminAlerts();    
+    //print "<pre>"; print_r($_POST['announcement_list']); exit;
+    require_once 'views/ui_admin_alerts.php';    
     
 # Registered Alumni
 } elseif ($_GET['m'] == 'registered_alumni') {
