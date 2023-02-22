@@ -9,13 +9,14 @@ if (session_status() === PHP_SESSION_NONE) {
 require_once 'config.php';
 require_once 'helper.php';
 
-
 require_once 'models/sql_alumni.php';
 $sql = new SQL_Alumni;
 require_once 'models/sql_tracer.php';
 $sql_tracer = new SQL_Tracer;
 
-
+if (!isset($_GET['alumni_key'])) {
+    $_GET['alumni_key'] = 0;
+}
 if (!isset($_GET['m'])) {
     $_GET['m'] = 'home';
 }
@@ -91,10 +92,18 @@ if ($_GET['m'] == 'login') {
     require_once 'views/ui_register.php';
     die();
 
-    # Registered Alumni
+# Alumni Profile
 } elseif ($_GET['m'] == 'tracer') {    
     //print "<pre>"; print_r($_SESSION['ais']); exit;
-    $alumni_key = $_SESSION['ais']['logged']['Alumni_Key'];
+    if ($_SESSION['ais']['logged'] == 'admin' && intval($_GET['alumni_key']) > 0) {
+        $_POST['disable_all'] = true;    
+        $alumni_key = $_GET['alumni_key'];
+    } elseif (isset($_SESSION['ais']['logged']['Alumni_Key'])) {    
+        $_GET['alumni_key'] = 0;
+        $alumni_key = $_SESSION['ais']['logged']['Alumni_Key'];
+    } else {
+        header('Location: index.php');
+    }
     if (isset($_POST['save_profile'])) {
         $_POST['profile_updates'] = array(
             'error' => array(),
@@ -112,7 +121,7 @@ if ($_GET['m'] == 'login') {
         $sql_tracer->checkSaveResults();
     } elseif (isset($_POST['to_profile'])) {
         $profile_sel = intval($_POST['to_profile']);
-        header("Location: index.php?m=tracer&profile=".$profile_sel);
+        header("Location: index.php?m=tracer&profile=".$profile_sel."&alumni_key={$alumni_key}");
 
     }
     $_POST['disabled'] = array(
@@ -198,6 +207,12 @@ if ($_GET['m'] == 'logout') {
     $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData($_POST['batch_sel'], $_POST['course_sel']);
     //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_registered_alumni.php';
+
+# Alumni Profile CV
+} elseif ($_GET['m'] == 'CV') {
+    $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData();
+    //print "<pre>"; print_r($_POST['table']); exit;
+    require_once 'views/ui_print_alumni_profile.php';
 
 # Employed Graduates
 } elseif ($_GET['m'] == 'employed_graduates') {

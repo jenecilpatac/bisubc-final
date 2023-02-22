@@ -76,6 +76,7 @@ class SQL_Tracer extends DB_Connect {
     {
         $sql = "
             SELECT *, 
+                t1.Alumni_Key,
                 concat(First_Name, ' ', Last_Name) as Name
             FROM users as t1
             LEFT JOIN alumni as t2 
@@ -89,7 +90,7 @@ class SQL_Tracer extends DB_Connect {
             WHERE Batch = '{$batch}'
                 AND Course_Code = '{$course_code}'
             ORDER BY Last_Name, First_Name
-        ";
+        ";        
         $results = $this->getDataFromTable($sql);
         //print "<pre>$sql"; print_r($results); exit;
 
@@ -109,7 +110,12 @@ class SQL_Tracer extends DB_Connect {
             'Position' => 'Position',
             'Awards_Received' => 'Awards Received',
         );       
-        $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);
+        $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);        
+        //print "<pre>"; print_r($table['table_data']); 
+        foreach ($table['table_data'] as $i => $row) {
+            $table['table_data'][$i]['Name'] = "<a target='_blank' href='index.php?m=tracer&alumni_key={$row['Alumni_Key']}'>{$row['Name']}</a>";
+        }
+        //print "<pre>"; print_r($table['table_data']); exit;
 
         return $table;
     }
@@ -160,13 +166,13 @@ class SQL_Tracer extends DB_Connect {
         return $table;
     }
 
-    public function getAlumniDataFolder()
+    public function getAlumniDataFolder($user)
     {          
         if (!is_dir(ALUMNI_DATA)) {
             createDir(ALUMNI_DATA);
         }
-        $lname = strtolower(preg_replace('/[^A-Z0-9]/i', '', $_SESSION['ais']['logged']['Last_Name']));
-        $fname = strtolower(preg_replace('/[^A-Z0-9]/i', '', $_SESSION['ais']['logged']['First_Name']));
+        $lname = strtolower(preg_replace('/[^A-Z0-9]/i', '', $user['Last_Name']));
+        $fname = strtolower(preg_replace('/[^A-Z0-9]/i', '', $user['First_Name']));
         $dir = ALUMNI_DATA."/{$lname}_$fname";
         //print "<pre>DIR: $dir\n";        
         if (!is_dir($dir)) {
@@ -208,9 +214,9 @@ class SQL_Tracer extends DB_Connect {
         }
     }
 
-    public function setAlumniProfilePicture()
+    public function setAlumniProfilePicture($user)
     {
-        $dir = $this->getAlumniDataFolder();
+        $dir = $this->getAlumniDataFolder($user);
         $files = getImagesFromDir($dir, 'profile_pic');
         if (!empty($files)) {
             $pic_path = current($files);
@@ -277,23 +283,25 @@ class SQL_Tracer extends DB_Connect {
 
     public function setAlumniProfileSessionData($alumni_key) 
     {
-        $profile = $this->getAlumniProfileData($alumni_key);
+        $profile = $this->getAlumniProfileData($alumni_key);        
+        $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
         $_SESSION['ais']['profile'] = $profile;
-        foreach ($_SESSION['ais']['logged'] as $field => $value) {
+        foreach ($user as $field => $value) {
             $field = strtoupper($field);
             $_SESSION['ais']['profile'][$field] = $value;
         }
-        $this->setAlumniProfilePicture();
+        $this->setAlumniProfilePicture($user);
     }
 
     public function saveAlumniProfile1($alumni_key)
-    {
+    {  
+        $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
         # Profile Picture
         if (isset($_FILES['profile_picture']) && isset($_FILES['profile_picture']['tmp_name'])) {
             $profile_pic = $_FILES['profile_picture']['tmp_name'];
             //print "<pre>$profile_pic\n";
             if (is_file($profile_pic)) {
-                $dir = $this->getAlumniDataFolder();
+                $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
                     $ext = getFileExtension($_FILES['profile_picture']['name']);
                     $new_file = "{$dir}/profile_pic.{$ext}";
@@ -317,15 +325,15 @@ class SQL_Tracer extends DB_Connect {
     }
 
     public function saveAlumniProfile3($alumni_key)
-    {
+    {  
+        $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
         //print "<pre>"; print_r($_POST); print_r($_FILES); exit;
-
         # Supporting Document
         if (isset($_FILES['SUPPORTING_DOC_FILE']) && isset($_FILES['SUPPORTING_DOC_FILE']['tmp_name'])) {
             $doc = $_FILES['SUPPORTING_DOC_FILE']['tmp_name'];
             //print "<pre>$profile_pic\n";
             if (is_file($doc)) {
-                $dir = $this->getAlumniDataFolder();
+                $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
                     $ext = getFileExtension($_FILES['SUPPORTING_DOC_FILE']['name']);
                     $new_file = "{$dir}/supporting_document.{$ext}";
@@ -341,7 +349,7 @@ class SQL_Tracer extends DB_Connect {
             $doc = $_FILES['AWARD_DOC_FILE']['tmp_name'];
             //print "<pre>$profile_pic\n";
             if (is_file($doc)) {
-                $dir = $this->getAlumniDataFolder();
+                $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
                     $ext = getFileExtension($_FILES['AWARD_DOC_FILE']['name']);
                     $new_file = "{$dir}/award_document.{$ext}";
