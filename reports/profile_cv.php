@@ -14,7 +14,14 @@ function LoadData($file)
 
 function ProfileStr($profile, $field)
 {
-    $str = !isset($profile[$field]) || is_array($profile[$field]) ? '' : $profile[$field];
+    $str = '';
+    if (isset($profile[$field])) {
+        if (is_array($profile[$field])) {
+            $str = implode(', ', $profile[$field]);
+        } else {
+            $str = $profile[$field];
+        }
+    }
 
     return $str;
 }
@@ -106,7 +113,7 @@ $pdf->Cell(0,0,'TRAININGS/ADVANCE STUDIES ATTENDED AFTER COLLEGE ',0,1);
 $pdf->Ln(7);  
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Title of Training or Advance Study(Masteral): ',0,1);
-$pdf->Cell(-120,0,$profile['EXAM_PASSED'],0,1, 'R');
+$pdf->Cell(-120,0,ProfileStr($profile, 'EXAM_PASSED'),0,1, 'R');
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','B',12);     
@@ -146,7 +153,7 @@ $pdf->Cell(-120,0,$profile['LEVEL_FIRST_JOB'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Job Level(current job): ',0,1);
-//$pdf->Cell(-120,0,$profile['LEVEL_CURRENT_JOB'],0,1, 'R');
+$pdf->Cell(-120,0,ProfileStr($profile, 'LEVEL_CURRENT_JOB'),0,1, 'R');
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','B',12);      
