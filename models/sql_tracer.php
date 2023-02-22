@@ -552,8 +552,8 @@ class SQL_Tracer extends DB_Connect {
             if (isset($_POST['SUPPORTING_DOCUMENT'])) {
                 $data['Supporting_Doc'] = $_POST['SUPPORTING_DOCUMENT'];
             }
-            if (isset($_POST['LEVEL_AWARD'])) {
-                $data['Awards_Received'] = ($_POST['LEVEL_AWARD'] == 'others') ? $_POST['LEVEL_AWARD_OTHERS'] : $_POST['LEVEL_AWARD'];
+            if (isset($_POST['AWARD_DOC'])) {
+                $data['Awards_Received'] = $_POST['AWARD_DOC'];
             }
             if (isset($_POST['FIRST_JOB_AFTER_GRAD'])) {
                 $data['Hired_2Years_After_Grad'] = ($_POST['FIRST_JOB_AFTER_GRAD'] == 'others') ? 0 : 1;
