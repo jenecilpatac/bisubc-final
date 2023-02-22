@@ -580,9 +580,12 @@ class SQL_Tracer extends DB_Connect {
             $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
             $_SESSION['ais']['logged'] = $user;
 
-            # Add Admin Alert
-            $alert = ucwords(strtolower($user['First_Name']))." ".ucwords(strtolower($user['Last_Name']))." updated his/her profile.";
-            $this->sql->addAdminAlerts($alert);
+
+            if (!isset($_POST['is_ajax'])) {
+                # Add Admin Alert
+                $alert = ucwords(strtolower($user['First_Name']))." ".ucwords(strtolower($user['Last_Name']))." updated his/her profile.";
+                $this->sql->addAdminAlerts($alert);
+            }
         } else {            
             # Update alumni logged data
             $user = $this->sql->getRegisteredAlumniProfile($alumni_key);

@@ -63,6 +63,7 @@
                 <strong>Note: For never been employed answer only 1; and for single or multiple employment -2</strong>
                 </p>  
                 <p class="mt-3">
+
                 <strong>1. For Never been employed:</strong></br>
                 </p>  
                 <p class="mt-3 ml-3">Reasons for Never Been Employed/Unemployment</p>
@@ -740,8 +741,8 @@
             <label class="form-check-label" for="inlineRadio3">Others, Please Specify
             </label> 
             <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0" 
-                    <?php if (isset($_SESSION['ais']['profile']['FIRST_JOB_AFTER_GRAD_OTHERS'])): ?>
-                        value="<?php echo $_SESSION['ais']['profile']['FIRST_JOB_AFTER_GRAD_OTHERS'] ?>"
+                    <?php if (isset($_SESSION['ais']['profile']['FIRST_JOB_FACTORS_OTHERS'])): ?>
+                        value="<?php echo $_SESSION['ais']['profile']['FIRST_JOB_FACTORS_OTHERS'] ?>"
                     <?php else: ?>
                         value=""
                     <?php endif; ?>
@@ -844,8 +845,8 @@
             Others, Please Specify
             </label> 
             <input type="text" name="CHALLENGES_OTHERS" 
-                    <?php if (isset($_SESSION['ais']['profile']['FIRST_JOB_AFTER_GRAD_OTHERS'])): ?>
-                        value="<?php echo $_SESSION['ais']['profile']['FIRST_JOB_AFTER_GRAD_OTHERS'] ?>"
+                    <?php if (isset($_SESSION['ais']['profile']['CHALLENGES_OTHERS'])): ?>
+                        value="<?php echo $_SESSION['ais']['profile']['CHALLENGES_OTHERS'] ?>"
                     <?php else: ?>
                         value=""
                     <?php endif; ?>

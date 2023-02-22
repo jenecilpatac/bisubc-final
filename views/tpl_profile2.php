@@ -43,6 +43,7 @@
                                 </li>
                             </ul>
                             <input type="hidden" name="from_profile" value="profile2" />
+                            <input type="hidden" name="alumni_key" value="<?php echo $_SESSION['ais']['logged']['Alumni_Key'] ?>" />
                         </nav>
                     </div>                        
                 </div>

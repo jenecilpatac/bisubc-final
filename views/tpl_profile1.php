@@ -1,45 +1,4 @@
-<?php
-
-$fields = array();
-$fields['First_Name'] = array('label' => 'First Name', 'type' => 'text');
-$fields['Middle_Name'] = array('label' => 'Middle Name', 'type' => 'text');
-$fields['Last_Name'] = array('label' => 'Last Name', 'type' => 'text');
-$fields['Permanent_Address'] = array('label' => 'Permanent Address', 'type' => 'text');
-$fields['Email'] = array('label' => 'Email Address', 'type' => 'text');
-$fields['Phone'] = array('label' => 'Phone', 'type' => 'text');
-$fields['Mobile'] = array('label' => 'Mobile', 'type' => 'text');
-$fields['Civil_Status'] = array(
-    'label' => 'Civil Status', 'type' => 'select',
-    'options' => array(
-        'Single', 
-        'Married', 
-        'Single Parent', 
-        'Separated', 
-        'Widow/Widower',
-    )
-);
-$fields['Sex'] = array(
-    'label' => 'Sex', 'type' => 'select',
-    'options' => array(
-        'Male', 
-        'Female', 
-    )
-);
-$fields['Birthday'] = array('label' => 'Birthday', 'type' => 'date');
-$fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type' => 'text');
-
-//print "<pre>"; print_r($_SESSION['ais']['profile']); exit;
-
-?>
-    <h5 class="h5 mb-0 text-gray-800"><strong>Alumni Profile</strong>
-        <div class="d-sm-flex align-items-center justify-content-between mb-4" style="float:right;">
-            <a href="./reports/profile_cv.php"  target="_blank" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                <i class="fas fa-download fa-sm text-white-50"></i> 
-                Download Profile
-            </a>
-        </div>
-    </h5>    
-    
+   
     <!-- Begin Page Content -->
     <div class="container-fluid" width="100%">
         <form action="index.php?m=tracer&profile=1&alumni_key=<?php echo $_GET['alumni_key'] ?>" method="POST" enctype="multipart/form-data">
@@ -139,6 +98,7 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                                 </li>
                             </ul>
                             <input type="hidden" name="from_profile" value="profile1" />
+                            <input type="hidden" name="alumni_key" value="<?php echo $_SESSION['ais']['logged']['Alumni_Key'] ?>" />
                         </nav>
                     </div>
                 </div>
