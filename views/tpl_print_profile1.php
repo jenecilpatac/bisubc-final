@@ -63,6 +63,9 @@ $fields['Annual_Income'] = array('label' => 'Annual Income of the Family', 'type
                         <?php else: ?>
                             <input class="form-control" 
                                 type="<?php echo $data['type'] ?>"
+                                <?php if ($field == 'BIRTHDAY'): ?>
+                                    max="<?php echo date('Y-m-d', strtotime(date('Y-m-d').' -10 year'))?>"
+                                <?php endif; ?>
                                 name="<?php echo strtoupper($field) ?>"
                                 <?php if (isset($_POST['disabled'][$field]) || isset($_POST['disable_all'])): ?>
                                     disabled
