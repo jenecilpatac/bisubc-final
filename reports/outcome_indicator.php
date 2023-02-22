@@ -32,10 +32,22 @@ $data = $pdf->LoadData('outcome_indicator.txt');
 $pdf->SetFont('Arial','',10);
 $pdf->SetLeftMargin(30); 
 $pdf->BasicTable($header, $data, $width);
+
+// Column headings
+$header[0] = array('Total Number of Graduates','Employed','Unemployed','Not Tracked');
+$header[1] = array(" ", ' ', ' ', ' ');
+$width = array(60, 60, 60, 60);
+//$pdf->MultiCell(0, 0, string $header)
+
+$pdf->Ln(10);
+// Data loading
+$data = $pdf->LoadData('outcome_indicator_summary.txt');
+$pdf->SetFont('Arial','',10);
+$pdf->SetLeftMargin(30); 
+$pdf->BasicTable($header, $data, $width);
 //$pdf->MultiCell(0, 0, string $data)
 $pdf->PrepareBy();
 
 $pdf->Output();
-
 
 ?>
