@@ -166,6 +166,10 @@ if (isset($_SESSION['ais']['logged']) && !empty($_SESSION['ais']['logged'])) {
 if ($_GET['m'] == 'logout') {
     logout();
 
+# About
+} elseif ($_GET['m'] == 'about') {
+    require_once 'views/ui_about.php';
+
 # Announcements
 } elseif ($_GET['m'] == 'announcements') {
     if (isset($_POST['save']) && $_POST['save'] == 'announcement') {

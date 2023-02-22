@@ -23,19 +23,30 @@
                 <span>Home</span></a>
             </li>
                 
-            <!-- Nav Item - Announcements -->
+            <!-- Nav Item - About -->
             <li class="nav-item
-                <?php if (isset($_GET['m']) && $_GET['m'] == 'announcements'): ?>
+                <?php if (isset($_GET['m']) && $_GET['m'] == 'about'): ?>
                     active
                 <?php endif; ?>
             ">
-                <a class="nav-link" href="index.php?m=announcements">
+                <a class="nav-link" href="index.php?m=about">
                 <i class="fa fa-bullhorn"></i>
-                <span>Announcements</span></a>
+                <span>About</span></a>
             </li>
     
 
-            <?php if (($_SESSION['ais']['logged'] != 'guest'))  : ?>    
+            <?php if (($_SESSION['ais']['logged'] != 'guest'))  : ?>               
+                <!-- Nav Item - Announcements -->
+                <li class="nav-item
+                    <?php if (isset($_GET['m']) && $_GET['m'] == 'announcements'): ?>
+                        active
+                    <?php endif; ?>
+                ">
+                    <a class="nav-link" href="index.php?m=announcements">
+                    <i class="fa fa-bullhorn"></i>
+                    <span>Announcements</span></a>
+                </li>
+                
                 <?php if ((is_array($_SESSION['ais']['logged']) && (isset($_SESSION['ais']['logged']['First_Name']))  || ($_SESSION['ais']['logged'] == 'admin' && intval($_GET['alumni_key']) > 0)) ): ?>                   
                     <!-- Divider -->
                     <hr class="sidebar-divider">
