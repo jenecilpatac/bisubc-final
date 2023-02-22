@@ -1,6 +1,4 @@
-BS Information Technology|49|27|55
-BS Computer Science|14|4|28
-BSIT-Food Preparation & Service Management|14|3|21
-BS Electrical Technology|15|5|30
-BS Electronics Technology|13|6|20
-Total|77|14|44 
+BS in Electronics Technology|17|0|0
+BS in Computer Science|5|0|0
+BS in Information Technology|26|0|0
+BSIT major in Food Preparation Service Management|20|0|0
