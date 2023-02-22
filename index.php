@@ -268,16 +268,6 @@ if ($_GET['m'] == 'logout') {
     $_POST['summary_table'] = $sql_tracer->getOutcomeIndicatorSummaryTableData($_POST['batch_sel'], $_POST['course_sel']);
     require_once 'views/ui_outcome_indicator.php';
 
-# Tracer
-} elseif ($_GET['m'] == 'tracer') { 
-    if (!empty($_POST)) {
-        //print "<pre>"; print_r($_POST); exit;
-    } 
-    $_POST['courses'] = $sql->getCourseList();
-    $_POST['batches'] = $sql->getBatches();
-    $_POST['disabled_fields'] = array();  
-    require_once 'views/ui_tracer.php';
-
 # Manage Courses
 } elseif ($_GET['m'] == 'manage_courses') {
     if (isset($_POST['save']) && $_POST['save'] == 'course') {

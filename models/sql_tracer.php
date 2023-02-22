@@ -400,6 +400,20 @@ class SQL_Tracer extends DB_Connect {
             $_SESSION['ais']['profile'][$field] = $value;
         }
         $this->setAlumniProfilePicture($user);
+        # Supporting Document        
+        $dir = $this->getAlumniDataFolder($user);
+        $files = getImagesFromDir($dir, 'supporting_document');
+        if (!empty($files)) {
+            $pic_path = current($files);
+            $_SESSION['ais']['profile']['SUPPORTING_DOC_FILE'] = $pic_path;
+        }
+        # Award Document        
+        $dir = $this->getAlumniDataFolder($user);
+        $files = getImagesFromDir($dir, 'award_document');
+        if (!empty($files)) {
+            $pic_path = current($files);
+            $_SESSION['ais']['profile']['AWARD_DOC_FILE'] = $pic_path;
+        }
     }
 
     public function saveAlumniProfile1($alumni_key)

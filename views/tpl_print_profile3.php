@@ -233,7 +233,11 @@
                     <?php endif; ?>
                     name="CONTACT_COMPANY">
                 </label><br>
-                <label class="name ml-3" for="supporting_doc">Supporting Document:
+                <label class="name ml-3" for="supporting_doc">Supporting Document:                 
+                    <?php if (isset($_SESSION['ais']['profile']['SUPPORTING_DOC_FILE'])): ?>
+                        <a target="_blank" href="<?php echo $_SESSION['ais']['profile']['SUPPORTING_DOC_FILE'] ?>">[View File]</a>
+                    <?php endif; ?> 
+                    
                 <input type="text"class="border border-warning border-top-0 border-right-0 border-left-0" 
                     <?php if (isset($_SESSION['ais']['profile']['SUPPORTING_DOCUMENT'])): ?>
                         value="<?php echo $_SESSION['ais']['profile']['SUPPORTING_DOCUMENT'] ?>"
@@ -852,7 +856,7 @@
         </div>
 
         <h6 class="mt-3 text-warning"><strong>E. AWARDS and ACHIEVEMENTS</strong></h6>                        
-        <p class="mt-3">1.Have you recieve any awards, promotions or recognitions at your previous or current jobs?</p>
+        <p class="mt-3">1. Have you recieve any awards, promotions or recognitions at your previous or current jobs?</p>
         <div class="form-check ml-3">
             <input class="form-check-input" type="radio" name="AWARDS" id="flexRadioDefault1" 
                     <?php if (isset($_SESSION['ais']['profile']['AWARDS']) && $_SESSION['ais']['profile']['AWARDS'] == 'yes'): ?>
@@ -880,7 +884,7 @@
             No
             </label>
         </div>
-        <p class="mt-3">2.If Yes, please indicate the level of award.</p>
+        <p class="mt-3">2. If Yes, please indicate the level of award.</p>
         <div class="form-check ml-3">
             <input class="form-check-input" type="radio" name="LEVEL_AWARD" id="flexRadioDefault1" 
                     <?php if (isset($_SESSION['ais']['profile']['LEVEL_AWARD']) && $_SESSION['ais']['profile']['LEVEL_AWARD'] == 'local'): ?>
@@ -939,17 +943,22 @@
                     <?php endif; ?>
                 class="border border-warning border-top-0 border-right-0 border-left-0">
         </div>
-        <p class="mt-3">3.If you answered Yes, indicate the name and please upload a picture/document of your certificate or plaque of recognition.</p>                            
-        <input type="text" name="AWARD_DOC" 
-                <?php if (isset($_SESSION['ais']['profile']['AWARD_DOC'])): ?>
-                    value="<?php echo $_SESSION['ais']['profile']['AWARD_DOC'] ?>"
-                <?php else: ?>
-                    value=""
-                <?php endif; ?>
-                    <?php if (isset($_POST['disable_all'])): ?>
-                        disabled
+        <p class="mt-3">
+            3. If you answered Yes, indicate the name and please upload a picture/document of your certificate or plaque of recognition.<br/>                   
+            <?php if (isset($_SESSION['ais']['profile']['AWARD_DOC_FILE'])): ?>
+                <a target="_blank" href="<?php echo $_SESSION['ais']['profile']['AWARD_DOC_FILE'] ?>">[View File]</a>
+            <?php endif; ?>                       
+            <input type="text" name="AWARD_DOC" 
+                    <?php if (isset($_SESSION['ais']['profile']['AWARD_DOC'])): ?>
+                        value="<?php echo $_SESSION['ais']['profile']['AWARD_DOC'] ?>"
+                    <?php else: ?>
+                        value=""
                     <?php endif; ?>
-            class="border border-warning border-top-0 border-right-0 border-left-0">
+                        <?php if (isset($_POST['disable_all'])): ?>
+                            disabled
+                        <?php endif; ?>
+                class="border border-warning border-top-0 border-right-0 border-left-0">
+        </p>
         <input type="file" class="form-control mt-2" name="AWARD_DOC_FILE" id="customFile2" value="choose_file" />
     </div>
 </div>
