@@ -12,6 +12,13 @@ function LoadData($file)
     return $data;
 }
 
+function ProfileStr($profile, $field)
+{
+    $str = !isset($profile[$field]) || is_array($profile[$field]) ? '' : $profile[$field];
+
+    return $str;
+}
+
 $json_file = file_get_contents('profile_cv.json');
 $profile = json_decode($json_file, true);
 //print "<pre>"; print_r($profile); exit;
@@ -56,7 +63,7 @@ $pdf->Cell(-120,0,$profile['FIRST_NAME'].' '.$profile['LAST_NAME'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
 $pdf->Cell(0,0,'Address: ',0,1);
-$pdf->Cell(-120,0,$profile['PERMANENT_ADDRESS'],0,1, 'R');
+$pdf->Cell(-120,0,ProfileStr($profile, 'PERMANENT_ADDRESS'),0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
 $pdf->Cell(0,0,'Email Adress: ',0,1);
@@ -79,13 +86,12 @@ $pdf->Cell(0,0,'Birthday: ',0,1);
 $pdf->Cell(-120,0,$profile['BIRTHDAY'],0,1, 'R');
 $pdf->Ln(10); 
 
-
 $pdf->SetFont('Arial','B',12);    
 $pdf->Cell(0,0,'EDUCATIONAL BACKGROUND: ',0,1);
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
 $pdf->Cell(0,0,'Educational Attainment: ',0,1);
-$pdf->Cell(-120,0,$profile['COURSE'],0,1, 'R');
+$pdf->Cell(-120,0,$profile['COURSE_NAME'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Year Graduated: ',0,1);
@@ -155,7 +161,7 @@ $pdf->SetFont('Arial','',12);
 $pdf->Cell(0,0,'Level of award: ',0,1);
 $pdf->Cell(-120,0,$profile['LEVEL_AWARD'],0,1, 'R');
 //$pdf->Cell(-120,0,$profile['LEVEL_AWARD_OTHERS'],0,1, 'R');
-$pdf->Output();
 
+$pdf->Output();
 
 ?>
