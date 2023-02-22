@@ -103,4 +103,23 @@ function createTmpReportData($data, $tmpfile)
     fclose($fd);
 }
 
+function deleteFileFromDir($path, $name_filter) 
+{    
+    if ($name_filter != '') {
+        $files = scandir($path);
+        foreach($files as $file) {
+            $fpath = $path.'/'.$file;
+            if (is_file($fpath)) {                
+                $base_fn = preg_replace('/\..+$/', '', $file);
+                if (preg_match("/{$name_filter}/", $base_fn)) {
+                    unlink($fpath);
+                }
+            }
+        }
+    }
+}
+
+
+
+
 ?>

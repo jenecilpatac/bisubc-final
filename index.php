@@ -118,7 +118,7 @@ if ($_GET['m'] == 'login') {
             $sql_tracer->saveAlumniProfile3($alumni_key);
         }
         //print "<pre>"; print_r($_SESSION['ais']); print_r($_POST); ;print_r($_FILES); exit;        
-        $sql_tracer->checkSaveResults();
+        $sql_tracer->checkSaveResults();        
     } elseif (isset($_POST['to_profile'])) {
         $profile_sel = intval($_POST['to_profile']);
         header("Location: index.php?m=tracer&profile=".$profile_sel."&alumni_key={$alumni_key}");
@@ -134,7 +134,7 @@ if ($_GET['m'] == 'login') {
     $sql_tracer->setAlumniProfileSessionData($alumni_key);   
     $tmpfile = './reports/profile_cv.json';
     file_put_contents($tmpfile, json_encode($_SESSION['ais']['profile']));
-    //print "<pre>"; print_r($_SESSION['ais']['profile']); exit;
+    //print "<pre>"; print_r($_SESSION['ais']['profile']); print_r($_SESSION['ais']['logged']); exit;
     $_POST['courses'] = $sql->getCourseList();
     $_POST['batches'] = $sql->getBatches();
     require_once 'views/ui_tracer.php';

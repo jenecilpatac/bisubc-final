@@ -428,9 +428,11 @@ class SQL_Tracer extends DB_Connect {
             if (is_file($profile_pic)) {
                 $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
+                    # Delete existing
+                    deleteFileFromDir($dir, 'profile_pic');
                     $ext = getFileExtension($_FILES['profile_picture']['name']);
                     $new_file = "{$dir}/profile_pic.{$ext}";
-                    //print "<pre>$new_file\n";
+                    //print "<pre>$new_file\n";                    
                     copy($profile_pic, $new_file);
                     $_POST['profile_updates']['success']['profile_picture'] = 'Profile picture has been updated';
                 }
@@ -460,6 +462,8 @@ class SQL_Tracer extends DB_Connect {
             if (is_file($doc)) {
                 $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
+                    # Delete existing
+                    deleteFileFromDir($dir, 'supporting_document');
                     $ext = getFileExtension($_FILES['SUPPORTING_DOC_FILE']['name']);
                     $new_file = "{$dir}/supporting_document.{$ext}";
                     //print "<pre>$new_file\n";
@@ -476,6 +480,8 @@ class SQL_Tracer extends DB_Connect {
             if (is_file($doc)) {
                 $dir = $this->getAlumniDataFolder($user);
                 if (is_dir($dir)) {
+                    # Delete existing
+                    deleteFileFromDir($dir, 'award_document');
                     $ext = getFileExtension($_FILES['AWARD_DOC_FILE']['name']);
                     $new_file = "{$dir}/award_document.{$ext}";
                     //print "<pre>$new_file\n";
@@ -569,7 +575,6 @@ class SQL_Tracer extends DB_Connect {
             $res = $this->insertTableRow($table, array_keys($data), array($data));
         }
 
-
         if ($res) {
             # Update alumni logged data
             $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
@@ -578,6 +583,10 @@ class SQL_Tracer extends DB_Connect {
             # Add Admin Alert
             $alert = ucwords(strtolower($user['First_Name']))." ".ucwords(strtolower($user['Last_Name']))." updated his/her profile.";
             $this->sql->addAdminAlerts($alert);
+        } else {            
+            # Update alumni logged data
+            $user = $this->sql->getRegisteredAlumniProfile($alumni_key);
+            $_SESSION['ais']['logged'] = $user;
         }
     }
 }
