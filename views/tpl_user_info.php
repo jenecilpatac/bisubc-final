@@ -8,8 +8,14 @@
                                     <?php else: ?>
                                         Admin
                                     <?php endif; ?>
-                                </span>
-                                <img class="img-profile rounded-circle" src="img/blank-profile-picture.png">
+                                </span>                             
+                                <img class="img-profile rounded-circle"                                 
+                                    <?php if (isset($_SESSION['ais']['profile']['PROFILE_PIC']) && is_file($_SESSION['ais']['profile']['PROFILE_PIC'])): ?>
+                                        src="<?php echo $_SESSION['ais']['profile']['PROFILE_PIC'] ?>"  
+                                    <?php else: ?>
+                                        src="img/blank-profile-picture.png" 
+                                    <?php endif; ?>
+                                >
                             </a>
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
