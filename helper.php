@@ -82,4 +82,25 @@ function getImagesFromDir($path, $name_filter='')
     return $images;
 }
 
+function createTmpReportData($data, $tmpfile)
+{
+    $file_path = './reports/'.$tmpfile;
+    $fd = fopen($file_path, "w");
+    if ($fd == null) {
+        die("Command 'fopen' failed for $file_path.");
+    }
+    $table = isset($data['table_pdf']) ? $data['table_pdf'] : $data['table_data'];
+    foreach ($table as $row) {    
+        $token = array();
+        foreach ($data['table_headers'] as $col => $header) {
+            $token[] = isset($row[$col]) ? $row[$col]: '';
+        }
+        if (!empty($token)) {
+            $line = implode('|', $token);
+            fwrite($fd, $line."\n");
+        }
+    }
+    fclose($fd);
+}
+
 ?>

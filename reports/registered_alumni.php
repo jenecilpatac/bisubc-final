@@ -15,11 +15,11 @@ $pdf->Cell(0,0,'Registered Alumni',0,0,'C');
 $pdf->Ln(6); // Line break
 $pdf->SetFont('Arial','',12);    
 $pdf->Cell(25);
-$pdf->Cell(0,0,'Academic Year 2019-2020',0,0,'C');
+$pdf->Cell(0,0,'Academic Year '.$_GET['batch'],0,0,'C');
 $pdf->Ln(8); // Line break
 $pdf->SetFont('Arial','',12);    
 $pdf->Cell(25);
-$pdf->Cell(0,0,'BS Information Technology',0,0,'C');
+$pdf->Cell(0,0,$_GET['course'],0,0,'C');
 $pdf->Ln(5); 
 
 $pdf->Ln(5); // Line break
@@ -28,7 +28,7 @@ $pdf->Ln(5); // Line break
 $header = array();
 $header[0] = array("Name", 'Address', 'Email', 'Status', 'Name of Company', 'Position', 'Awards');
 $header[1] = array(" ", ' ', ' ', ' ', ' ', ' ', ' ');
-$width = array(45, 45, 40, 25, 40, 35, 50);
+$width = array(45, 45, 60, 25, 40, 35, 30);
 //$pdf->MultiCell(0, 0, string $header)
 // Data loading
 $data = $pdf->LoadData('registered_alumni.txt');

@@ -122,7 +122,6 @@ if ($_GET['m'] == 'login') {
     } elseif (isset($_POST['to_profile'])) {
         $profile_sel = intval($_POST['to_profile']);
         header("Location: index.php?m=tracer&profile=".$profile_sel."&alumni_key={$alumni_key}");
-
     }
     $_POST['disabled'] = array(
         'FIRST_NAME' => true,
@@ -132,7 +131,9 @@ if ($_GET['m'] == 'login') {
         'COURSE_NAME' => true,
         'BATCH' => true,
     );    
-    $sql_tracer->setAlumniProfileSessionData($alumni_key);     
+    $sql_tracer->setAlumniProfileSessionData($alumni_key);   
+    $tmpfile = './reports/profile_cv.json';
+    file_put_contents($tmpfile, json_encode($_SESSION['ais']['profile']));
     //print "<pre>"; print_r($_SESSION['ais']['profile']); exit;
     $_POST['courses'] = $sql->getCourseList();
     $_POST['batches'] = $sql->getBatches();
@@ -218,7 +219,11 @@ if ($_GET['m'] == 'logout') {
             $_POST['course_sel'] = '-';
         }
     }
+    $course_data = $sql->getCourseData($_POST['course_sel']);
+    //print "<pre>"; print_r($_POST); print_r($course_data); exit;
+    $_POST['course_name'] = !empty($course_data) ? $course_data['Course_Name'] : '-';
     $_POST['table'] = $sql_tracer->getRegisteredAlumniTableData($_POST['batch_sel'], $_POST['course_sel']);
+    createTmpReportData($_POST['table'], 'registered_alumni.txt');
     //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_registered_alumni.php';
 
@@ -238,6 +243,7 @@ if ($_GET['m'] == 'logout') {
         }
     }
     $_POST['table'] = $sql_tracer->getEmployedGraduatesTableData($_POST['batch_sel']);
+    createTmpReportData($_POST['table'], 'employed_graduates.txt');
     //print "<pre>"; print_r($_POST['table']); exit;
     require_once 'views/ui_employed_graduates.php';
 
@@ -264,8 +270,13 @@ if ($_GET['m'] == 'logout') {
             $_POST['course_sel'] = '-';
         }
     }
+    $course_data = $sql->getCourseData($_POST['course_sel']);
+    //print "<pre>"; print_r($_POST); print_r($course_data); exit;
+    $_POST['course_name'] = !empty($course_data) ? $course_data['Course_Name'] : '-';
     $_POST['details_table'] = $sql_tracer->getOutcomeIndicatorTableData($_POST['batch_sel'], $_POST['course_sel']);
     $_POST['summary_table'] = $sql_tracer->getOutcomeIndicatorSummaryTableData($_POST['batch_sel'], $_POST['course_sel']);
+    createTmpReportData($_POST['details_table'], 'outcome_indicator.txt');
+    createTmpReportData($_POST['summary_table'], 'outcome_indicator_summary.txt');
     require_once 'views/ui_outcome_indicator.php';
 
 # Manage Courses

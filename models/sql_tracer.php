@@ -112,6 +112,7 @@ class SQL_Tracer extends DB_Connect {
         );       
         $table['table_data'] = $this->getRegisteredAlumniList($batch, $course_code);
         //print "<pre>"; print_r($table['table_data']); 
+        $table['table_pdf'] = $table['table_data'];
         foreach ($table['table_data'] as $i => $row) {
             $table['table_data'][$i]['Name'] = "<a target='_blank' href='index.php?m=tracer&alumni_key={$row['Alumni_Key']}'>{$row['Name']}</a>";
         }
