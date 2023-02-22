@@ -858,7 +858,7 @@
         <h6 class="mt-3 text-warning"><strong>E. AWARDS and ACHIEVEMENTS</strong></h6>                        
         <p class="mt-3">1. Have you recieve any awards, promotions or recognitions at your previous or current jobs?</p>
         <div class="form-check ml-3">
-            <input class="form-check-input" type="radio" name="AWARDS" id="flexRadioDefault1" 
+            <input class="form-check-input " type="radio" name="AWARDS" id="flexRadioDefault1" 
                     <?php if (isset($_SESSION['ais']['profile']['AWARDS']) && $_SESSION['ais']['profile']['AWARDS'] == 'yes'): ?>
                         checked
                     <?php endif; ?>
@@ -946,7 +946,7 @@
         <p class="mt-3">
             3. If you answered Yes, indicate the name and please upload a picture/document of your certificate or plaque of recognition.<br/>                   
             <?php if (isset($_SESSION['ais']['profile']['AWARD_DOC_FILE'])): ?>
-                <a target="_blank" href="<?php echo $_SESSION['ais']['profile']['AWARD_DOC_FILE'] ?>">[View File]</a>
+                <a target="_blank" id="AWARD_DOC_FILE_LINK" href="<?php echo $_SESSION['ais']['profile']['AWARD_DOC_FILE'] ?>">[View File]</a>
             <?php endif; ?>                       
             <input type="text" name="AWARD_DOC" 
                     <?php if (isset($_SESSION['ais']['profile']['AWARD_DOC'])): ?>

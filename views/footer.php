@@ -100,7 +100,6 @@
     <script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
     <script src="js/demo/datatables-demo.js"></script>
-    <script src="extensions/editable/bootstrap-table-editable.js"></script>
     <script src="js/ais.js"></script>
 
 </body>
