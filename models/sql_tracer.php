@@ -187,7 +187,8 @@ class SQL_Tracer extends DB_Connect {
         $sql = "
             SELECT *, 
                 t2.Alumni_Key,
-                concat(First_Name, ' ', Last_Name) as Name
+                concat(First_Name, ' ', Last_Name) as Name,
+                if (Employment_Status='' or Employment_Status is NULL, 'untracked', Employment_Status) as Employment_Status
             FROM alumni as t2
             LEFT JOIN batches as t4 
                 ON t2.Batch_Key = t4.Batch_Key
