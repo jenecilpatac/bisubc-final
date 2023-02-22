@@ -55,7 +55,7 @@ $pdf->Cell(0,0,'Name: ',0,0);
 $pdf->Cell(-120,0,$profile['FIRST_NAME'].' '.$profile['LAST_NAME'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
-$pdf->Cell(0,0,'Adress: ',0,1);
+$pdf->Cell(0,0,'Address: ',0,1);
 $pdf->Cell(-120,0,$profile['PERMANENT_ADDRESS'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
@@ -101,10 +101,6 @@ $pdf->Ln(7);
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Title of Training or Advance Study(Masteral): ',0,1);
 $pdf->Cell(-120,0,$profile['EXAM_PASSED'],0,1, 'R');
-$pdf->Ln(7); 
-$pdf->SetFont('Arial','',12);     
-$pdf->Cell(0,0,'What made you pursue advance studies: ',0,1);
-$pdf->Cell(-120,0,$profile['PURSUE_ADVANCE_STUDIES'],0,1, 'R');
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','B',12);     
@@ -144,7 +140,7 @@ $pdf->Cell(-120,0,$profile['LEVEL_FIRST_JOB'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Job Level(current job): ',0,1);
-$pdf->Cell(-120,0,$profile['LEVEL_CURRENT_JOB'],0,1, 'R');
+//$pdf->Cell(-120,0,$profile['LEVEL_CURRENT_JOB'],0,1, 'R');
 $pdf->Ln(10);
 
 $pdf->SetFont('Arial','B',12);      
@@ -158,11 +154,7 @@ $pdf->Ln(7);
 $pdf->SetFont('Arial','',12);      
 $pdf->Cell(0,0,'Level of award: ',0,1);
 $pdf->Cell(-120,0,$profile['LEVEL_AWARD'],0,1, 'R');
-$pdf->Cell(-120,0,$profile['LEVEL_AWARD_OTHERS'],0,1, 'R');
-
-
-
-
+//$pdf->Cell(-120,0,$profile['LEVEL_AWARD_OTHERS'],0,1, 'R');
 $pdf->Output();
 
 
