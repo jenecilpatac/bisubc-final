@@ -3,14 +3,19 @@
 require_once 'fpdf_lib.php';
 
 function LoadData($file)
-    {
-        // Read file lines
-        $lines = file($file);
-        $data = array();
-        foreach($lines as $line)
-            $data[] = explode('|',trim($line));
-        return $data;
-    }
+{
+    // Read file lines
+    $lines = file($file);
+    $data = array();
+    foreach($lines as $line)
+        $data[] = explode('|',trim($line));
+    return $data;
+}
+
+$json_file = file_get_contents('profile_cv.json');
+$profile = json_decode($json_file, true);
+//print "<pre>"; print_r($profile); exit;
+
 // Instanciation of inherited class
 $pdf = new PDF();
 $pdf->AliasNbPages();
@@ -38,7 +43,7 @@ $pdf->Cell(0,0,'Magsija, Balilihan, Bohol',0,0,'C');
 $pdf->Ln(10); 
 
 $data = $pdf->LoadData('profile_cv.txt');
-$pdf->Image('../img/blank-profile-picture.png',150,40,45);
+$pdf->Image('../'.$profile['PROFILE_PIC'],150,40,45);
 $pdf->SetFont('Times','',12);
 $pdf->Ln(10);
 
@@ -46,7 +51,8 @@ $pdf->SetFont('Arial','B',12);
 $pdf->Cell(0,0,'PERSONAL PROFILE: ',0,1);
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',11);     
-$pdf->Cell(0,0,'Name: ',0,1);
+$pdf->Cell(0,0,'Name: ',0,0);  
+$pdf->Cell(-120,0,$profile['FIRST_NAME'].' '.$profile['LAST_NAME'],0,1, 'R');
 $pdf->Ln(7); 
 $pdf->SetFont('Arial','',12);     
 $pdf->Cell(0,0,'Adress: ',0,1);
