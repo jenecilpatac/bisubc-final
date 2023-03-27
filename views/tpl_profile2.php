@@ -12,7 +12,7 @@
                                         << Previous 
                                     </button>
                                 </li>
-                                <li class="page-item m-1">                                                
+                               <!-- <li class="page-item m-1">                                                
                                     <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="1">
                                         Profile 1
                                     </button>
@@ -26,7 +26,7 @@
                                     <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="3">
                                         Profile 3 
                                     </button>
-                                </li>
+                                </li>-->
                                 <li class="page-item m-1">                                                
                                     <button class="btn btn-primary btn-user btn-block mb-3 btn-warning" type="submit" name="to_profile" value="3">
                                         Next >> 

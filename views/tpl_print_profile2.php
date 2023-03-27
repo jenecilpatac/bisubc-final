@@ -1,5 +1,6 @@
-
+<h6 class="mb-0"><i>(Please <strong>save changes</strong> before you <strong>proceed</strong>)</i></h6>
 <div class="card">
+
     <div class="card-body">                  
         <h6 class="text-warning mt-3"><strong>B. EDUCATIONAL BACKGROUND</strong></h6>
         
@@ -158,7 +159,7 @@
                 </tbody>
             </table>
             
-            <p>2. What made you pursue advance studies?</p>
+            <!--<p>2. What made you pursue advance studies?</p>
             <div class="ml-4">
                 <div class="form-check form-check-inline">
                     <input class="form-check-input" type="radio" name="PURSUE_ADVANCE_STUDIES" id="inlineRadio1"                                           
@@ -209,7 +210,7 @@
                         <?php endif; ?>
                         name="PURSUE_ADVANCE_STUDIES_OTHERS" />
                 </div>
-            </div>                    
+            </div> -->                   
         
     </div>
             

@@ -59,14 +59,14 @@
                         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo1"
                             aria-expanded="true" aria-controls="collapseTwo">
                             <i class="fas fa-fw fa-folder  text-white"></i>
-                            <span>Alumni Tracer</span>
+                            <span>Alumni Tracer Survey</span>
                         </a>
                         <div id="collapseTwo1" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                             <div class="bg-white py-2 collapse-inner rounded">
                                 <h6 class="collapse-header">Grduate Tracer Survey:</h6>
-                                <a class="collapse-item" href="index.php?m=tracer&profile=1&alumni_key=<?php echo $_GET['alumni_key'] ?>">Profile 1</a>
-                                <a class="collapse-item" href="index.php?m=tracer&profile=2&alumni_key=<?php echo $_GET['alumni_key'] ?>">Profile 2</a>
-                                <a class="collapse-item" href="index.php?m=tracer&profile=3&alumni_key=<?php echo $_GET['alumni_key'] ?>">Profile 3</a>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=1&alumni_key=<?php echo $_GET['alumni_key'] ?>">Page 1</a>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=2&alumni_key=<?php echo $_GET['alumni_key'] ?>">Page 2</a>
+                                <a class="collapse-item" href="index.php?m=tracer&profile=3&alumni_key=<?php echo $_GET['alumni_key'] ?>">Page 3</a>
                             </div>
                         </div>
                     </li>

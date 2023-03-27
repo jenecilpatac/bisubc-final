@@ -961,5 +961,13 @@
                 class="border border-warning border-top-0 border-right-0 border-left-0">
         </p>
         <input type="file" class="form-control mt-2" name="AWARD_DOC_FILE" id="customFile2" value="choose_file" />
+        
+        <p class="mt-4">
+            Comments and Suggestion you can give to the University for improvement                   
+                  <br>                
+            <input type="text" name="SUGGESTION" 
+                class="border border-warning border-top-0 border-right-0 border-left-0" style="width: 100%;"> 
+        </p>
     </div>
+    
 </div>

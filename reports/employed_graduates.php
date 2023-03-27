@@ -7,12 +7,13 @@ $pdf = new PDF();
 $pdf->AliasNbPages();
 $pdf->AddPage('L', 'A4');
 $pdf->HeaderLogo();
+$pdf->VisionMission();
 $pdf->SetFont('Times','',12);
 
 
 $pdf->SetFont('Arial','B',12);  // Arial bold 15        
 $pdf->Cell(30); // Move to the right
-$pdf->Cell(0,0,'Number of Employed Graduates',0,0,'C');
+$pdf->Cell(0,0,'Percentage of Employed Graduates',0,0,'C');
 $pdf->Ln(6); // Line break
 $pdf->SetFont('Arial','',12);    
 $pdf->Cell(30);

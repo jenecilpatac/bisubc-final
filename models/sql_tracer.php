@@ -61,6 +61,7 @@ class SQL_Tracer extends DB_Connect {
         'LEVEL_AWARD_OTHERS',
         'AWARD_DOC',
         'AWARD_DOC_FILE',
+        'SUGGESTION',
     );
 
     public function __construct() 
@@ -103,7 +104,7 @@ class SQL_Tracer extends DB_Connect {
         $table['table_id'] = 'dataTable'; // 'registered_alumni_tbl';
         $table['table_headers'] = array(
             'Name' => 'Name',
-            'Address' => 'Address',
+            //'Company_Address' => 'Address',
             'Email' => 'Email',
             'Employment_Status' => 'Status',
             'Company_Name' => 'Name of Company',
@@ -515,6 +516,7 @@ class SQL_Tracer extends DB_Connect {
             'Profile1',
             'Profile2',
             'Profile3',
+            'Company_Address',
             'Employment_Status',
             'Company_Name',
             'Supporting_Doc',
@@ -547,6 +549,9 @@ class SQL_Tracer extends DB_Connect {
                 }
             }
             $data['Profile3'] = json_encode($profile);
+            if (isset($_POST['ADDRESS_COMPANY'])) {
+                $data['Company_Adress'] = $_POST['ADDRESS_COMPANY'];
+            }
             if (isset($_POST['EMPLOYMENT_STATUS'])) {
                 $data['Employment_Status'] = $_POST['EMPLOYMENT_STATUS'];
             }

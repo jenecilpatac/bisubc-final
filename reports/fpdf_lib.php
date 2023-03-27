@@ -30,7 +30,20 @@ class PDF extends FPDF
         $this->Cell($line_indent); 
         $this->Cell(0,0,'Magsija, Balilihan, Bohol',0,0,'C');
         
-        $this->Ln(20);
+        $this->Ln(8);
+    }
+    
+    function VisionMission(){
+        $this->SetFont('Arial','',8);     
+        $this->Cell(0,0,'Mision: A premier Science and Technology university for the formation of world class and virtuous human resource for sustainable development in Bohol and the Country.',0,0,'C');
+        $this->Ln(3);
+        $this->SetFont('Arial','',8);     
+        $this->Cell(0,0,'Vision: BISU is committed to provide quality higher education in the arts and sciences, as well as in the professional and technological fields; undertake research and',0,0,'C');
+        $this->Ln(3);
+        $this->SetFont('Arial','',8);     
+        $this->Cell(0,0,'development and extension services for the sustainable development of Bohol and the country.',0,0,'C');
+        $this->Line(20,45, 300-20,45);
+        $this->Ln(15);
     }
 
     // Page header
@@ -49,7 +62,7 @@ class PDF extends FPDF
         $this->SetFont('Arial','B',12); // Arial bold 15     
         $this->Cell(-150,10,'JOCELYN P. LUMACTUD',0,0,'R');
         $this->Cell(100);
-        $this->Cell(1,10,'DR. BENJAMIN N. OMAMALIN',0,0,'R');
+        $this->Cell(-23,10,'BENJAMIN N. OMAMALIN, Ph.D, CoE.',0,0,'C');
         $this->SetFont('Arial','',12); // Arial bold 15     
         $this->Ln($line_space); 
         $this->Cell(0,10,'Designation',0,0); 
@@ -60,9 +73,9 @@ class PDF extends FPDF
         $this->Ln(25); 
         $this->SetLeftMargin(135); 
         $this->SetFont('Arial','B',12); // Arial bold 15     
-        $this->Cell(0,0,'JEAN F. NEBREA',0,1);
+        $this->Cell(-3,0,'JEAN F. NEBREA,Ph.D',0,1,'L');
         $this->SetFont('Arial','',12);   
-        $this->Cell(0,10,'Campus Director',0,0);
+        $this->Cell(0,10,'Campus Director',0,0,'L');
         $this->SetLeftMargin(40); 
         $this->Ln(15); 
         $this->SetFont('Arial','B',12); // Arial bold 15     

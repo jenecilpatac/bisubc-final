@@ -2,12 +2,12 @@
 
 $fields = array();
 $fields['FIRST_NAME'] = array('label' => 'First Name', 'type' => 'text');
-$fields['MIDDLE_NAME'] = array('label' => 'Middle Name', 'type' => 'text');
+//$fields['MIDDLE_NAME'] = array('label' => 'Middle Name', 'type' => 'text');
 $fields['LAST_NAME'] = array('label' => 'Last Name', 'type' => 'text');
 $fields['PERMANENT_ADDRESS'] = array('label' => 'Permanent Address', 'type' => 'text');
 $fields['EMAIL'] = array('label' => 'Email Address', 'type' => 'text');
 $fields['PHONE'] = array('label' => 'Phone', 'type' => 'text');
-$fields['MOBILE'] = array('label' => 'Mobile', 'type' => 'text');
+//$fields['MOBILE'] = array('label' => 'Mobile', 'type' => 'text');
 $fields['CIVIL_STATUS'] = array(
     'label' => 'Civil Status', 'type' => 'select',
     'options' => array(
